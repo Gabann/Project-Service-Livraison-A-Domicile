@@ -1,0 +1,21 @@
+{
+  "name": "FrontMobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-native": "0.73.6"
+  },
+  "devDependencies": {
+    "@react-native/eslint-config": "0.73.2",
+    "@react-native/metro-config": "0.73.5",
+    "eslint": "^8.19.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
