@@ -10,13 +10,17 @@ import NotFoundView from '../views/NotFoundView.vue'
 
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: [
+    history: createWebHistory(),
+    routes: [
 
-    { path: '/', component:  },
-    { path: '/', component:  },
-    { path: '/not-', component:  },
-  ],
+        { path: '/', component: SignInView },
+        { path: '/SignIn', component: SignInView },
+        { path: '/Login', component: LoginView },
+        { path: '/Meal', component: MealView },
+        { path: '/Order', component: OrderView },
+        { path: '/Dashboard', component: DashboardView },
+        { path: '/not-found', component: NotFoundView },
+    ],
 });
 
 export default router
