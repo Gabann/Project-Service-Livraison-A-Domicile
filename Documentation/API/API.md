@@ -17,7 +17,7 @@ Base url: 10.125.52.56:3000/api
 
 4. `GET /api/user/getAllRestaurant`
     - Description: Endpoint to get all restaurants.
-    - Authentication: Yes
+   - Authentication: No
     - Request Body: None
 
 5. `POST /api/manager/signUp`
