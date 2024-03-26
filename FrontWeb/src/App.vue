@@ -1,12 +1,18 @@
-<script setup>
-</script>
-
 <template>
-	  <div>
-		<h1>Hello World!</h1>
-     </div>
-</template>
-
-<style scoped>
-
-</style>
+	<div id="app">
+	  <Header />
+	  <router-view />
+	</div>
+  </template>
+  
+  <script>
+  import Header from "./components/Header.vue";
+  
+  export default {
+	name: "App",
+	components: {
+	  Header,
+	},
+  };
+  </script>
+  
