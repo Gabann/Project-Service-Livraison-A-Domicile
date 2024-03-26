@@ -6,14 +6,13 @@ const {sendResponse} = require("../utils");
 const {bcryptSaltRounds} = require("../const");
 
 const userController = {
-
 	signUp: async (req, res) => {
 		try {
 			let username = req.body.username;
 			let password = req.body.password;
 			let email = req.body.email;
 			let phoneNumber = req.body.phoneNumber;
-			
+
 			let hashedPassword = await bcrypt.hash(password, bcryptSaltRounds);
 			await dataBaseModel.Utilisateur.create({username: username, email: email, password: hashedPassword, phoneNumber: phoneNumber});
 

@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
 const {sendResponse, verifyToken} = require("../utils");
-const {bcryptSaltRounds} = require("../const");
 
 const restaurantController = {
 	addRestaurant: async (req, res) => {
@@ -57,6 +56,23 @@ const restaurantController = {
 
 	getAllRestaurants: async (req, res) => {
 		try {
+			const restaurantLIst = await dataBaseModel.Restaurant.findAll({
+				include: [{
+					model: dataBaseModel.Adresse,
+					attributes: ["street", "city", "postalCode", "country"],
+				}],
+			});
+
+
+			sendResponse(res, 200, "Restaurants fetched successfully", {restaurantLIst});
+		} catch (error) {
+			console.error(error);
+			sendResponse(res, 500, error.errors[0].message);
+		}
+	},
+
+	getAllOwnedRestaurants: async (req, res) => {
+		try {
 			let token = req.headers.authorization.split(" ")[1];
 			let isTokenValid = verifyToken(token);
 
@@ -67,7 +83,13 @@ const restaurantController = {
 			let decodedToken = jwt.decode(token);
 			let managerId = decodedToken.managerId;
 
-			const restaurantLIst = await dataBaseModel.Restaurant.findAll({where: {GerantRestaurantId: managerId}});
+			const restaurantLIst = await dataBaseModel.Restaurant.findAll({
+				where: {GerantRestaurantId: managerId},
+				include: [{
+					model: dataBaseModel.Adresse,
+					attributes: ["street", "city", "postalCode", "country"],
+				}],
+			});
 
 			sendResponse(res, 200, "Restaurants fetched successfully", {restaurantLIst});
 		} catch (error) {
