@@ -61,3 +61,8 @@ Base url: 10.125.52.56:3000/api
     - Description: Endpoint for deliverer login.
     - Authentication: Yes
     - Request Body: `{ "username" (required), "password" (required) }`
+
+13. `POST /manager/deleteRestaurant `
+    - Description: Endpoint for managers to delete restaurant by id.
+    - Authentication: Yes
+    - Request Body: `{ "restaurantId" (required) }`

@@ -1,9 +1,7 @@
-const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
 const {sendResponse, verifyToken} = require("../utils");
-const {bcryptSaltRounds} = require("../const");
 
 const articleController = {
 
@@ -37,7 +35,7 @@ const articleController = {
 			transaction = await sequelize.transaction();
 
 
-			let article = await dataBaseModel.Article.create({
+			await dataBaseModel.Article.create({
 				name: name,
 				ingredients: ingredients,
 				price: price,

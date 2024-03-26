@@ -1,14 +1,30 @@
 const jwt = require("jsonwebtoken");
 
-module.exports.sendResponse = function (res, statusCode, responseMessage, optionalResponse = {}) {
+function sendResponse(res, statusCode, responseMessage, optionalResponse = {}) {
 	res.status(statusCode).json({message: responseMessage, ...optionalResponse});
-};
+}
 
-module.exports.verifyToken = function (token) {
+function verifyToken(token) {
 	try {
 		jwt.verify(token, process.env.TOKEN_SECRET);
 		return true;
 	} catch (error) {
 		return false;
 	}
+}
+
+function getDecodedToken(token) {
+	let isTokenValid = verifyToken(token);
+
+	if (!isTokenValid) {
+		return null;
+	}
+
+	return jwt.decode(token);
+}
+
+module.exports = {
+	sendResponse,
+	verifyToken,
+	getDecodedToken
 };

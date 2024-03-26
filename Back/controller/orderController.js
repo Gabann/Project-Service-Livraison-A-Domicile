@@ -1,9 +1,7 @@
-const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
 const {sendResponse, verifyToken} = require("../utils");
-const {bcryptSaltRounds} = require("../const");
 
 const orderController = {
 	makeOrder: async (req, res) => {
