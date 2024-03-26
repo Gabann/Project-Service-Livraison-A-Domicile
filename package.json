@@ -18,7 +18,9 @@
     "pinia": "^2.1.7",
     "sequelize": "^6.36.0",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "mysql2": "^3.9.1",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
