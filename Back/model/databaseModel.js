@@ -208,6 +208,72 @@ module.exports = (sequelize) => {
 		},
 	});
 
+	const CommandeAdresse = sequelize.define('CommandeAdresse', {
+		id: {
+			type: DataTypes.INTEGER,
+			primaryKey: true,
+			autoIncrement: true,
+		},
+		CommandeId: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'Commandes',
+				key: 'id',
+			},
+		},
+		AdresseId: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'Adresses',
+				key: 'id',
+			},
+		},
+	});
+
+	const MenuArticle = sequelize.define('MenuArticle', {
+		id: {
+			type: DataTypes.INTEGER,
+			primaryKey: true,
+			autoIncrement: true,
+		},
+		MenuId: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'Menus',
+				key: 'id',
+			},
+		},
+		ArticleId: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'Articles',
+				key: 'id',
+			},
+		},
+	});
+
+	const CommandeMenu = sequelize.define('CommandeMenu', {
+		id: {
+			type: DataTypes.INTEGER,
+			primaryKey: true,
+			autoIncrement: true,
+		},
+		CommandeId: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'Commandes',
+				key: 'id',
+			},
+		},
+		MenuId: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'Menus',
+				key: 'id',
+			},
+		},
+	});
+
 	GerantRestaurant.hasOne(Restaurant);
 	Restaurant.belongsTo(GerantRestaurant);
 
@@ -221,7 +287,7 @@ module.exports = (sequelize) => {
 	Article.belongsTo(Restaurant);
 
 	Menu.hasMany(Article);
-	Article.belongsToMany(Menu, {through: 'Menu_Article'});
+	Article.belongsToMany(Menu, {through: {model: MenuArticle, unique: false}});
 
 	Livreur.hasMany(Commande);
 	Commande.belongsTo(Livreur);
@@ -236,13 +302,13 @@ module.exports = (sequelize) => {
 	Paiement.belongsTo(Commande);
 
 	Commande.hasOne(Adresse);
-	Adresse.belongsToMany(Commande, {through: 'Commande_Adresse'});
+	Adresse.belongsToMany(Commande, {through: {model: CommandeAdresse, unique: false}});
 
 	Commande.hasMany(Article);
 	Article.belongsToMany(Commande, {through: {model: CommandeArticle, unique: false}});
 
 	Commande.hasMany(Menu);
-	Menu.belongsToMany(Commande, {through: 'Commande_Menu'});
+	Menu.belongsToMany(Commande, {through: {model: CommandeMenu, unique: false}});
 
 	return {Restaurant, GerantRestaurant, Menu, Article, Livreur, Commande, Adresse, Utilisateur, Paiement, CommandeArticle};
 };
