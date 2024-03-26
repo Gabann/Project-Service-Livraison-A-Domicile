@@ -30,6 +30,7 @@ sequelize = new Sequelize(
 	}
 );
 
+
 sequelize
 	.sync({force: false, alter: false})
 	.then(() => {

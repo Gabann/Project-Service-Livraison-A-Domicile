@@ -45,3 +45,9 @@ Base url: 10.125.52.56:3000/api
     - Authentication: Yes
     - Request
       Body: `{ "restaurantId" (required), "name" (required), "ingredients" (required), "price" (required), "type" (required), "preparationTimeSec" (optional) }`
+
+10. `POST /user/makeOrder `
+    - Description: Endpoint for users to make an order.
+    - Authentication: Yes
+    - Request
+      Body: `{ "articleIdArray" (required) }`

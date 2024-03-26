@@ -186,6 +186,28 @@ module.exports = (sequelize) => {
 		},
 	});
 
+	const CommandeArticle = sequelize.define('CommandeArticle', {
+		id: {
+			type: DataTypes.INTEGER,
+			primaryKey: true,
+			autoIncrement: true,
+		},
+		CommandeId: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'Commandes',
+				key: 'id',
+			},
+		},
+		ArticleId: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'Articles',
+				key: 'id',
+			},
+		},
+	});
+
 	GerantRestaurant.hasOne(Restaurant);
 	Restaurant.belongsTo(GerantRestaurant);
 
@@ -217,10 +239,10 @@ module.exports = (sequelize) => {
 	Adresse.belongsToMany(Commande, {through: 'Commande_Adresse'});
 
 	Commande.hasMany(Article);
-	Article.belongsToMany(Commande, {through: 'Commande_Article'});
+	Article.belongsToMany(Commande, {through: {model: CommandeArticle, unique: false}});
 
 	Commande.hasMany(Menu);
 	Menu.belongsToMany(Commande, {through: 'Commande_Menu'});
 
-	return {Restaurant, GerantRestaurant, Menu, Article, Livreur, Commande, Adresse, Utilisateur, Paiement};
+	return {Restaurant, GerantRestaurant, Menu, Article, Livreur, Commande, Adresse, Utilisateur, Paiement, CommandeArticle};
 };
