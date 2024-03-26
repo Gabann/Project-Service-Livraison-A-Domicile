@@ -1,0 +1,22 @@
+import { createRouter, createWebHistory } from 'vue-router'
+// import { useAuthStore } from '../stores/auth'
+
+import SignInView from '../views/SignInView.vue'
+import LoginView from '../views/LoginView.vue'
+import MealView from '../views/MealView.vue'
+import OrderView from '../views/OrderView.vue'
+import DashboardView from '../views/DashboardView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
+
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+
+    { path: '/', component:  },
+    { path: '/', component:  },
+    { path: '/not-', component:  },
+  ],
+});
+
+export default router
