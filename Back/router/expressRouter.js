@@ -7,6 +7,7 @@ const restaurantManagerController = require("../controller/restaurantManagerCont
 const restaurantController = require("../controller/restaurantControler");
 const articleController = require("../controller/articleController");
 const orderController = require("../controller/orderController");
+const delivererController = require("../controller/livreurController");
 const {JsonWebTokenError} = jwt;
 
 function isTokenValid(req, res) {
@@ -58,6 +59,9 @@ expressRouter.post('/api/manager/logIn', restaurantManagerController.logIn);
 expressRouter.post('/api/manager/addRestaurant', restaurantController.addRestaurant);
 expressRouter.get('/api/manager/getAllOwnedRestaurant', restaurantController.getAllOwnedRestaurants);
 expressRouter.post('/api/manager/addArticle', articleController.addArticle);
+
+expressRouter.post('/api/deliverer/signUp', delivererController.signUp);
+expressRouter.post('/api/deliverer/logIn', delivererController.logIn);
 
 
 module.exports = expressRouter;

@@ -51,3 +51,13 @@ Base url: 10.125.52.56:3000/api
     - Authentication: Yes
     - Request
       Body: `{ "articleIdArray" (required) }`
+
+11. `POST /deliverer/signUp `
+    - Description: Endpoint for deliverer registration.
+    - Authentication: Yes
+    - Request Body: `{ "username" (required), "password" (required) }`
+
+12. `POST /deliverer/logIn `
+    - Description: Endpoint for deliverer login.
+    - Authentication: Yes
+    - Request Body: `{ "username" (required), "password" (required) }`
