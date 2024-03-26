@@ -13,9 +13,7 @@ const userController = {
 			let password = req.body.password;
 			let email = req.body.email;
 			let phoneNumber = req.body.phoneNumber;
-
-			console.log(username, password, email, phoneNumber);
-
+			
 			let hashedPassword = await bcrypt.hash(password, bcryptSaltRounds);
 			await dataBaseModel.Utilisateur.create({username: username, email: email, password: hashedPassword, phoneNumber: phoneNumber});
 
@@ -45,7 +43,7 @@ const userController = {
 				expiresIn: "30d",
 			});
 
-			sendResponse(res, 200, "Successfully logged in, redirecting...", {token: token});
+			sendResponse(res, 200, "Successfully logged in", {token: token});
 		} catch (error) {
 			sendResponse(res, 500, error.message);
 		}
