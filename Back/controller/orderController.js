@@ -23,7 +23,7 @@ const orderController = {
 			let postalCode = req.body.postalCode;
 			let country = req.body.country;
 
-			let adress = await sequelize.transaction(async (transaction) => {
+			let address = await sequelize.transaction(async (transaction) => {
 				let addressQuery = await dataBaseModel.Adresse.findOne({
 					where: {
 						street: street,
@@ -48,12 +48,12 @@ const orderController = {
 			let order = await sequelize.transaction(async (transaction) => {
 				let order = await dataBaseModel.Commande.create({
 					UtilisateurId: userId,
-					status: "En attente"
+					status: "En attente de confirmation"
 				}, {transaction});
 
 				await dataBaseModel.CommandeAdresse.create({
 					CommandeId: order.id,
-					AdresseId: adress.id
+					AdresseId: address.id
 				}, {transaction});
 
 				return order;
@@ -74,7 +74,7 @@ const orderController = {
 			console.error(error);
 			sendResponse(res, 500, error.message);
 		}
-	}
+	},
 }
 
 module.exports = orderController;

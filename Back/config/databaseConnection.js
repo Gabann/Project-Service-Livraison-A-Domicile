@@ -32,7 +32,7 @@ sequelize = new Sequelize(
 
 
 sequelize
-	.sync({force: false, alter: true})
+	.sync({force: false, alter: false})
 	.then(() => {
 		console.log('Database successfully synchronized.');
 	})

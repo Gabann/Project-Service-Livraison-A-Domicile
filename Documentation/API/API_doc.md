@@ -94,6 +94,27 @@ Base url: 10.125.52.56:3000/api
    - Example: `{ "restaurantId": 1, "name": "Article1", "ingredients": "Ingredient1, Ingredient2", "price": 10, "type": "Type1",
      "preparationTimeSec": 600 }`
 
+1. `POST /manager/getRestaurantOpenOrders`
+    - Description: Endpoint for restaurant manager to get all open orders for a specific restaurant.
+    - Authentication: Yes
+    - Request Body:
+        - `restaurantId`: The id of the restaurant for which to fetch open orders. This field is required.
+    - Example: `{ "restaurantId": 1 }`
+
+1. `POST /manager/confirmOrder`
+    - Description: Endpoint for restaurant manager to confirm an order.
+    - Authentication: Yes
+    - Request Body:
+        - `orderId`: The id of the order to be confirmed. This field is required.
+    - Example: `{ "orderId": 1 }`
+
+1. `POST /manager/cancelOrder`
+    - Description: Endpoint for restaurant manager to cancel an order.
+    - Authentication: Yes
+    - Request Body:
+        - `orderId`: The id of the order to be cancelled. This field is required.
+    - Example: `{ "orderId": 1 }`
+
 1. `POST /deliverer/signUp`
     - Description: Endpoint for deliverer registration.
    - Authentication: No
@@ -109,3 +130,15 @@ Base url: 10.125.52.56:3000/api
        - `username`: The username of the deliverer. This field is required.
        - `password`: The password of the deliverer. This field is required.
    - Example: `{ "username": "deliverer1", "password": "password1" }`
+
+1. `GET /deliverer/getAllOpenOrders`
+    - Description: Endpoint for deliverer to get all open orders.
+    - Authentication: Yes
+    - Request Body: None
+
+1. `POST /deliverer/assingOrderToSelf`
+    - Description: Endpoint for deliverer to assign an order to themselves.
+    - Authentication: Yes
+    - Request Body:
+        - `orderId`: The id of the order to be assigned. This field is required.
+    - Example: `{ "orderId": 1 }`

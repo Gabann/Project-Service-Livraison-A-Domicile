@@ -115,7 +115,7 @@ module.exports = (sequelize) => {
 			autoIncrement: true,
 		},
 		status: {
-			type: DataTypes.ENUM('En attente', 'Annulée', 'Livrée', 'En cours de livraison'),
+			type: DataTypes.ENUM('En attente de confirmation', 'En attente de livraison', 'Annulée', 'Livrée', 'En cours de livraison'),
 			allowNull: false,
 		},
 		expectedDeliveryTime: {
@@ -307,8 +307,8 @@ module.exports = (sequelize) => {
 	Adresse.hasMany(CommandeAdresse);
 	CommandeAdresse.belongsTo(Adresse);
 
-	Commande.belongsToMany(Article, {through: {model: CommandeArticle, unique: false}});
-	Article.belongsToMany(Commande, {through: {model: CommandeArticle, unique: false}});
+	Commande.belongsToMany(Article, {through: CommandeArticle});
+	Article.belongsToMany(Commande, {through: CommandeArticle});
 
 	Commande.belongsToMany(Menu, {through: {model: CommandeMenu, unique: false}});
 	Menu.belongsToMany(Commande, {through: {model: CommandeMenu, unique: false}});

@@ -1,14 +1,12 @@
 const express = require("express");
 const expressRouter = express.Router();
-const jwt = require('jsonwebtoken');
 const {sendResponse} = require("../utils");
 const userController = require("../controller/userControler");
 const restaurantManagerController = require("../controller/restaurantManagerController");
 const restaurantController = require("../controller/restaurantControler");
 const articleController = require("../controller/articleController");
 const orderController = require("../controller/orderController");
-const delivererController = require("../controller/livreurController");
-const {JsonWebTokenError} = jwt;
+const delivererController = require("../controller/delivererController");
 
 // function isTokenValid(req, res) {
 // 	try {
@@ -56,13 +54,18 @@ expressRouter.post('/api/user/makeOrder', orderController.makeOrder);
 
 expressRouter.post('/api/manager/signUp', restaurantManagerController.signUp);
 expressRouter.post('/api/manager/logIn', restaurantManagerController.logIn);
+expressRouter.get('/api/manager/getAllOwnedRestaurant', restaurantManagerController.getAllOwnedRestaurants);
 expressRouter.post('/api/manager/addRestaurant', restaurantController.addRestaurant);
-expressRouter.get('/api/manager/getAllOwnedRestaurant', restaurantController.getAllOwnedRestaurants);
 expressRouter.post('/api/manager/addArticle', articleController.addArticle);
 expressRouter.post('/api/manager/deleteRestaurant', restaurantController.deleteRestaurant);
+expressRouter.get('/api/manager/getOpenOrders', restaurantManagerController.getRestaurantOpenOrders);
+expressRouter.post('/api/manager/confirmOrder', restaurantManagerController.confirmOrder);
+expressRouter.post('/api/manager/cancelOrder', restaurantManagerController.cancelOrder);
+
 
 expressRouter.post('/api/deliverer/signUp', delivererController.signUp);
 expressRouter.post('/api/deliverer/logIn', delivererController.logIn);
-
+expressRouter.get('/api/deliverer/getOpenOrders', delivererController.getAllOpenOrders);
+expressRouter.post('/api/deliverer/assignOrder', delivererController.assingOrderToSelf);
 
 module.exports = expressRouter;

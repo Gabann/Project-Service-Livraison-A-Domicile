@@ -56,7 +56,7 @@ const articleController = {
 		} catch (error) {
 			if (transaction) await transaction.rollback();
 			console.error(error);
-			sendResponse(res, 500, error.errors[0].message);
+			sendResponse(res, 500, error.message);
 		}
 	}
 };

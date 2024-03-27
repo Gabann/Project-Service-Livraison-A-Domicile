@@ -2,8 +2,9 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
-const {sendResponse} = require("../utils");
+const {sendResponse, getDecodedToken, verifyToken} = require("../utils");
 const {bcryptSaltRounds} = require("../const");
+const {Sequelize} = require("sequelize");
 
 const restaurantManagerController = {
 
@@ -53,6 +54,142 @@ const restaurantManagerController = {
 			sendResponse(res, 500, error.message);
 		}
 	},
+
+	getAllOwnedRestaurants: async (req, res) => {
+		try {
+			let token = req.headers.authorization.split(" ")[1];
+			let decodedToken = getDecodedToken(token);
+			if (!decodedToken) {
+				return sendResponse(res, 401, "Invalid token");
+			}
+
+			let managerId = decodedToken.managerId;
+
+			const restaurantLIst = await dataBaseModel.Restaurant.findAll({
+				where: {GerantRestaurantId: managerId},
+				include: [{
+					model: dataBaseModel.Adresse,
+					attributes: ["street", "city", "postalCode", "country"],
+				}],
+			});
+
+			sendResponse(res, 200, "Restaurants fetched successfully", {restaurantLIst});
+		} catch (error) {
+			console.error(error);
+			sendResponse(res, 500, error.errors[0].message);
+		}
+	},
+
+	getRestaurantOpenOrders: async (req, res) => {
+		try {
+			let token = req.headers.authorization.split(" ")[1];
+			let decodedToken = getDecodedToken(token);
+			if (!decodedToken) {
+				return sendResponse(res, 401, "Invalid token");
+			}
+
+			let managerId = decodedToken.managerId;
+			let restaurantId = req.body.restaurantId;
+
+			transaction = await sequelize.transaction();
+
+			let restaurant = await dataBaseModel.Restaurant.findOne({
+				where: {id: restaurantId},
+			});
+
+			if (!restaurant) {
+				return sendResponse(res, 404, "Restaurant not found");
+			}
+
+			if (restaurant.GerantRestaurantId !== managerId) {
+				return sendResponse(res, 401, "You don't have to access this restaurant orders");
+			}
+
+			let result = await dataBaseModel.Commande.findAll({
+				where: {
+					status: 'En attente de confirmation'
+				},
+				include: [{
+					model: dataBaseModel.Article,
+					include: [{
+						model: dataBaseModel.Restaurant,
+						where: {id: restaurantId}
+					}]
+				}],
+				group: ['Commande.id']
+			});
+
+			if (result.length === 0) {
+				return sendResponse(res, 404, "No open orders found");
+			}
+
+			sendResponse(res, 200, "Successfully fetched open orders", {result});
+		} catch (error) {
+			sendResponse(res, 500, error.message);
+		}
+	},
+
+	confirmOrder: async (req, res) => {
+		try {
+			let token = req.headers.authorization.split(" ")[1];
+			let decodedToken = getDecodedToken(token);
+			if (!decodedToken) {
+				return sendResponse(res, 401, "Invalid token");
+			}
+
+			let orderId = req.body.orderId;
+
+			let order = await dataBaseModel.Commande.findOne({
+				where: {
+					id: orderId,
+					status: 'En attente de confirmation'
+				}
+			});
+
+			if (!order) {
+				return sendResponse(res, 404, "Order not found");
+			}
+
+			await order.update({
+				status: 'En attente de livraison',
+			});
+
+			sendResponse(res, 200, "Order confirmed successfully");
+		} catch (error) {
+			sendResponse(res, 500, error.message);
+		}
+	},
+
+	cancelOrder: async (req, res) => {
+		try {
+			let token = req.headers.authorization.split(" ")[1];
+			let decodedToken = getDecodedToken(token);
+			if (!decodedToken) {
+				return sendResponse(res, 401, "Invalid token");
+			}
+
+			let orderId = req.body.orderId;
+
+			let order = await dataBaseModel.Commande.findOne({
+				where: {
+					id: orderId,
+					status: 'En attente de confirmation'
+				}
+			});
+
+			if (!order) {
+				return sendResponse(res, 404, "Order not found");
+			}
+
+			await order.update({
+				status: 'Annulée',
+			});
+
+			sendResponse(res, 200, "Order cancelled successfully");
+		} catch (error) {
+			sendResponse(res, 500, error.message);
+		}
+	}
 };
 
 module.exports = restaurantManagerController;

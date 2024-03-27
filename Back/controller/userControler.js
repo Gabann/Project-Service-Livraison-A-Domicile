@@ -19,7 +19,7 @@ const userController = {
 			sendResponse(res, 201, "User added successfully");
 		} catch (error) {
 			console.error(error);
-			sendResponse(res, 500, error.errors[0].message);
+			sendResponse(res, 500, error.message);
 		}
 	},
 
