@@ -28,6 +28,12 @@ Base url: 10.125.52.56:3000/api
    - Authentication: No
     - Request Body: None
 
+1. `GET /user/getAllArticlesFromRestaurant`
+    - Description: Endpoint to get all articles from a specific restaurant.
+    - Authentication: Yes
+        - `restaurantId`: The id of the restaurant. This field is required.
+    - Example: `{ "restaurantId": 1 }`
+
 1. `POST /user/makeOrder`
     - Description: Endpoint for users to place an order. The user needs to provide an array of `ArticleId` that they want to order and the
       address where the order should be delivered.
@@ -91,7 +97,7 @@ Base url: 10.125.52.56:3000/api
        - `price`: The price of the article. This field is required.
        - `type` ('Entrée' | 'Plat' | 'Déssert' | 'Boisson'): The type of the article. This field is required.
        - `preparationTimeSec`: The preparation time of the article in seconds. This field is optional.
-   - Example: `{ "restaurantId": 1, "name": "Article1", "ingredients": "Ingredient1, Ingredient2", "price": 10, "type": "Type1",
+   - Example: `{ "restaurantId": 1, "name": "Article1", "ingredients": "Ingredient1, Ingredient2", "price": 10, "type": "Plat",
      "preparationTimeSec": 600 }`
 
 1. `POST /manager/getRestaurantOpenOrders`
@@ -136,7 +142,7 @@ Base url: 10.125.52.56:3000/api
     - Authentication: Yes
     - Request Body: None
 
-1. `POST /deliverer/assingOrderToSelf`
+1. `POST /deliverer/assignOrderToSelf`
     - Description: Endpoint for deliverer to assign an order to themselves.
     - Authentication: Yes
     - Request Body:

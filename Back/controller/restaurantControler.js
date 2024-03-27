@@ -9,11 +9,7 @@ const restaurantController = {
 		try {
 			let token = req.headers.authorization.split(" ")[1];
 			let decodedToken = getDecodedToken(token);
-			if (!decodedToken) {
-				return sendResponse(res, 401, "Invalid token");
-			}
-
-			let managerId = decodedToken.managerId;
+			let managerId = decodedToken.id;
 
 			let name = req.body.name;
 			let street = req.body.street;
@@ -44,7 +40,7 @@ const restaurantController = {
 		} catch (error) {
 			if (transaction) await transaction.rollback();
 			console.error(error);
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 
@@ -54,11 +50,9 @@ const restaurantController = {
 		try {
 			let token = req.headers.authorization.split(" ")[1];
 			let decodedToken = getDecodedToken(token);
-			if (!decodedToken) {
-				return sendResponse(res, 401, "Invalid token");
-			}
+			let managerId = decodedToken.id;
 
-			let managerId = decodedToken.managerId;
+			console.log(managerId);
 
 			let restaurantId = req.body.restaurantId;
 
@@ -85,24 +79,7 @@ const restaurantController = {
 		} catch (error) {
 			if (transaction) await transaction.rollback();
 			console.error(error);
-			sendResponse(res, 500, error.errors[0].message);
-		}
-	},
-
-	getAllRestaurants: async (req, res) => {
-		try {
-			const restaurantLIst = await dataBaseModel.Restaurant.findAll({
-				include: [{
-					model: dataBaseModel.Adresse,
-					attributes: ["street", "city", "postalCode", "country"],
-				}],
-			});
-
-
-			sendResponse(res, 200, "Restaurants fetched successfully", {restaurantLIst});
-		} catch (error) {
-			console.error(error);
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 };
