@@ -28,6 +28,12 @@ Base url: 10.125.52.56:3000/api
    - Authentication: No
     - Request Body: None
 
+1. `GET /user/getAllArticlesFromRestaurant`
+    - Description: Endpoint to get all articles from a specific restaurant.
+    - Authentication: Yes
+        - `restaurantId`: The id of the restaurant. This field is required.
+    - Example: `{ "restaurantId": 1 }`
+
 1. `POST /user/makeOrder`
     - Description: Endpoint for users to place an order. The user needs to provide an array of `ArticleId` that they want to order and the
       address where the order should be delivered.

@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
-const {sendResponse} = require("../utils");
+const {sendResponse, getDecodedToken} = require("../utils");
 const {bcryptSaltRounds} = require("../const");
 
 const userController = {
@@ -44,6 +44,46 @@ const userController = {
 
 			sendResponse(res, 200, "Successfully logged in", {token: token});
 		} catch (error) {
+			sendResponse(res, 500, error.message);
+		}
+	},
+
+	getAllRestaurants: async (req, res) => {
+		try {
+			const restaurantLIst = await dataBaseModel.Restaurant.findAll({
+				include: [{
+					model: dataBaseModel.Adresse,
+					attributes: ["street", "city", "postalCode", "country"],
+				}],
+			});
+
+			sendResponse(res, 200, "Restaurants fetched successfully", {restaurantLIst});
+		} catch (error) {
+			console.error(error);
+			sendResponse(res, 500, error.message);
+		}
+	},
+
+	getAllArticlesFromRestaurant: async (req, res) => {
+		try {
+			let token = req.headers.authorization.split(" ")[1];
+			let decodedToken = getDecodedToken(token);
+			if (!decodedToken) {
+				return sendResponse(res, 401, "Invalid token");
+			}
+
+			let restaurantId = req.body.restaurantId;
+
+			const articleList = await dataBaseModel.Article.findAll({
+				include: [{
+					model: dataBaseModel.Restaurant,
+					where: {id: restaurantId}
+				}],
+			});
+
+			sendResponse(res, 200, "Articles fetched successfully", {articleList});
+		} catch (error) {
+			console.error(error);
 			sendResponse(res, 500, error.message);
 		}
 	},

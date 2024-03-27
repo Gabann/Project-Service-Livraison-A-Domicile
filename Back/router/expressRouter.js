@@ -48,7 +48,8 @@ expressRouter.get('/api/test', async (req, res) => {
 
 expressRouter.post('/api/user/signUp', userController.signUp);
 expressRouter.post('/api/user/logIn', userController.logIn);
-expressRouter.get('/api/user/getAllRestaurant', restaurantController.getAllRestaurants);
+expressRouter.get('/api/user/getAllRestaurant', userController.getAllRestaurants);
+expressRouter.get('/api/user/getAllArticlesFromRestaurant', userController.getAllArticlesFromRestaurant);
 expressRouter.post('/api/user/makeOrder', orderController.makeOrder);
 
 

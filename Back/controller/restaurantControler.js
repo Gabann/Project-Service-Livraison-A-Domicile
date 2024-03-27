@@ -88,23 +88,6 @@ const restaurantController = {
 			sendResponse(res, 500, error.errors[0].message);
 		}
 	},
-
-	getAllRestaurants: async (req, res) => {
-		try {
-			const restaurantLIst = await dataBaseModel.Restaurant.findAll({
-				include: [{
-					model: dataBaseModel.Adresse,
-					attributes: ["street", "city", "postalCode", "country"],
-				}],
-			});
-
-
-			sendResponse(res, 200, "Restaurants fetched successfully", {restaurantLIst});
-		} catch (error) {
-			console.error(error);
-			sendResponse(res, 500, error.message);
-		}
-	},
 };
 
 module.exports = restaurantController;
