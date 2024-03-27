@@ -1,24 +1,77 @@
+<script setup>
+import { useRestaurantsStore } from "./stores/restaurantsStore";
+
+const restaurantsStore = useRestaurantsStore();
+
+const props = defineProps(["restaurantId"]);
+
+const restaurantFound = restaurantsStore.restaurants.find((r) => r.id === props.restaurantId);
+
+</script>
+
 <template>
-    <div class="restaurant-card">
-      <img :src="restaurant.image" alt="Image du restaurant" />
-      <h2>{{ restaurant.name }}</h2>
-      <!-- Autres informations sur le restaurant si nécessaire -->
-    </div>
-  </template>
+    <RouterLink :to="`/restaurants/details/${restaurantFound.id}`" class="restaurant-card">
+      <div class="card-picture">
+        <img :src="restaurantFound ? restaurantFound.pictureURL : ''" alt="">
+      </div>
+      <div class="card-title">
+        <span>{{ restaurantFound ? restaurantFound.title : "Unknown" }}</span>
+      </div>
   
-  <script>
-  export default {
-    name: 'RestaurantCard',
-    props: {
-      restaurant: {
-        type: Object,
-        required: true
-      }
-    }
+    </RouterLink>
+</template>
+
+<style scoped>
+  .restaurant-card {
+    text-decoration: none;
+    border: solid 1px black;
+    border-radius: 10px;
+    overflow: hidden;
+
+    display: grid;
+    grid-template: 8fr 1fr / 1fr;
+
+    background-color: black;
   }
-  </script>
-  
-  <style scoped>
-  /* Styles CSS spécifiques à la carte du restaurant */
-  </style>
+
+  .card-title {
+    display: block;
+    color: transparent;
+    padding: 1ch 2ch;
+    position: relative;
+    left: 120%;
+    transition: left 400ms ease,
+                color 400ms ease;
+  }
+
+  .restaurant-card:hover >.card-title {
+    left: 0;
+    color: yellowgreen
+  }
+
+  .card-picture > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: filter 200ms ease;
+    filter: grayscale(1);
+  }
+
+  .restaurant-card:hover > .card-picture > img {
+    filter: grayscale(0);
+  }
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
   

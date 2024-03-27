@@ -1,5 +1,6 @@
 <template>
     <div>
+      <h1>Commandez votre repas !!!</h1>
       <input type="text" v-model="address" placeholder="Entrez une adresse..." />
       <button @click="search">Rechercher</button>
     </div>

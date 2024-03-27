@@ -65,6 +65,9 @@ Tech stack:
 [![Redux][ReduxBadge]][ReduxUrl]
 [![Node.js][NodeBadge]][NodeUrl]
 [![Android Studio][AndroidStudioBadge]][AndroidStudioUrl]
+[![Vue.js][VueBadge]][VueUrl]
+[![Pinia][PiniaBadge]][PiniaUrl]
+
 
 
 <div align="right"><a href="#readme-top">back to top</a></div>
@@ -189,3 +192,11 @@ information.
 [license-shield]: https://img.shields.io/github/license/gabann/Projet-Service-Livraison-A-Domicile.svg?style=for-the-badge
 
 [license-url]: https://github.com/Gabann/Projet-Service-Livraison-A-Domicile/blob/main/LICENSE
+
+[VueBadge]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D
+
+[VueUrl]: https://vuejs.org/
+
+[PiniaBadge]: https://img.shields.io/badge/Pinia-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D&color=FDDA0D
+
+[PiniaUrl]: https://pinia.vuejs.org/

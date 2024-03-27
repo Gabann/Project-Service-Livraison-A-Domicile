@@ -5,18 +5,16 @@ const dataBaseModel = require('../model/databaseModel')(sequelize);
 const {sendResponse} = require("../utils");
 const {bcryptSaltRounds} = require("../const");
 
-const userController = {
+const delivererController = {
 	signUp: async (req, res) => {
 		try {
 			let username = req.body.username;
 			let password = req.body.password;
-			let email = req.body.email;
-			let phoneNumber = req.body.phoneNumber;
 
 			let hashedPassword = await bcrypt.hash(password, bcryptSaltRounds);
-			await dataBaseModel.Utilisateur.create({username: username, email: email, password: hashedPassword, phoneNumber: phoneNumber});
+			await dataBaseModel.Livreur.create({username: username, password: hashedPassword});
 
-			sendResponse(res, 201, "User added successfully");
+			sendResponse(res, 201, "Livreur added successfully");
 		} catch (error) {
 			console.error(error);
 			sendResponse(res, 500, error.errors[0].message);
@@ -28,7 +26,7 @@ const userController = {
 			let username = req.body.username;
 			let password = req.body.password;
 
-			const user = await dataBaseModel.Utilisateur.findOne({where: {username: username}});
+			const user = await dataBaseModel.Livreur.findOne({where: {username: username}});
 			if (!user) {
 				return sendResponse(res, 401, "Username or password incorrect");
 			}
@@ -49,4 +47,4 @@ const userController = {
 	},
 };
 
-module.exports = userController;
+module.exports = delivererController;
