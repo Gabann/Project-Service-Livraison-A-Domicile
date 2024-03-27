@@ -1,8 +1,19 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink, RouterView } from 'vue-router';
+import { useAuthStore } from '../store/authStore';
 
-let isLoggedIn = ref(false);
+const authStore = useAuthStore();
+const isLoggedIn = authStore.isLoggedIn;
+
+const logOut = async () => {
+    try {
+        authStore.logOut();
+    } catch (error) {
+        alert(error.message);
+    }
+};
+
 
 </script>
 
@@ -15,37 +26,34 @@ let isLoggedIn = ref(false);
             </div>
             <ul>
                 <li>
-                    <span v-if="!isLoggedIn" >
+                    <span v-if="!isLoggedIn">
                         <RouterLink to="/SignIn">Ajoutez votre restaurant</RouterLink>
                     </span>
                 </li>
                 <li>
-                    <span v-if="isLoggedIn" >
+                    <span v-if="isLoggedIn">
                         <RouterLink to="/Meal">Meal</RouterLink>
                     </span>
                 </li>
                 <li>
-                    <span v-if="isLoggedIn" >
+                    <span v-if="isLoggedIn">
                         <RouterLink to="/Order">Order</RouterLink>
                     </span>
                 </li>
                 <li>
-                    <span v-if="isLoggedIn" >
+                    <span v-if="isLoggedIn">
                         <RouterLink to="/Dashboard">Dashboard</RouterLink>
                     </span>
                 </li>
                 <li>
-                    <div >
-                        <span v-if="!isLoggedIn" @click="isLoggedIn = !isLoggedIn" >
-                            <RouterLink to="/Login">Log In</RouterLink>
+                    <div class="is-logged-in-btn">
+                        <RouterLink to="/Login" v-if="!isLoggedIn" class="is-logged-in-btn-true">Log In</RouterLink>
+                        <span v-if="isLoggedIn">
+                            <RouterLink to="/Login" @click="logOut" class="is-logged-in-btn-false">Log Out</RouterLink>
                         </span>
-
-                        <span v-else @click="isLoggedIn = !isLoggedIn" >
-                            <RouterLink to="/">Log Out</RouterLink>
-                        </span>
-
                     </div>
                 </li>
+
 
             </ul>
         </nav>
@@ -53,7 +61,6 @@ let isLoggedIn = ref(false);
 </template>
 
 <style scoped>
-
 header {
     width: 100%;
     color: var(--text-app);
@@ -74,7 +81,7 @@ nav ul {
     display: flex;
     margin-right: 3rem;
     margin-bottom: 0%;
-    
+
 }
 
 nav ul li {

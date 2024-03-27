@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import { useAuthStore } from '../stores/auth'
+import { useAuthStore } from '../store/authStore'
 
 import SignInView from '../views/SignInView.vue'
 import LoginView from '../views/LoginView.vue'
@@ -13,14 +13,37 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
 
-        { path: '/', component: SignInView },
+        { path: '/', component: LoginView },
         { path: '/SignIn', component: SignInView },
         { path: '/Login', component: LoginView },
-        { path: '/Meal', component: MealView },
-        { path: '/Order', component: OrderView },
-        { path: '/Dashboard', component: DashboardView },
+        { path: '/Meal', component: MealView, /*meta: { requiresAuth: true }*/},
+        { path: '/Order', component: OrderView, /*meta: { requiresAuth: true }*/},
+        { path: '/Dashboard', component: DashboardView, /*meta: { requiresAuth: true}*/},
         { path: '/not-found', component: NotFoundView },
     ],
 });
 
-export default router
+
+// router.beforeEach((to, from, next) => {
+//     const authStore = useAuthStore();
+
+//     // Vérifier si l'utilisateur est connecté
+//     const isLoggedIn = authStore.isLoggedIn;
+
+//     if (to.path === '/logIn' || to.path === '/SignIn') {
+//         if (isLoggedIn) {
+//             next('/Dashboard');
+//         } else {
+//             next();
+//         }
+//     } else {
+//         if (!isLoggedIn) {
+//             next('/logIn');
+//         } else {
+//             next();
+//         }
+//     }
+// });
+
+
+export default router;
