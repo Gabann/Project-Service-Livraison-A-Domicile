@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
 		email: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			unique: true
+			unique: 'email'
 		},
 		password: {
 			type: DataTypes.STRING,
@@ -82,7 +82,7 @@ module.exports = (sequelize) => {
 			allowNull: false,
 		},
 		type: {
-			type: DataTypes.ENUM('Entrée', 'Plat', 'Désert', 'Boisson'),
+			type: DataTypes.ENUM('Entrée', 'Plat', 'Déssert', 'Boisson'),
 			allowNull: true,
 		},
 		preparationTimeSec: {
@@ -100,7 +100,7 @@ module.exports = (sequelize) => {
 		username: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			unique: true
+			unique: 'username'
 		},
 		password: {
 			type: DataTypes.STRING,
@@ -161,7 +161,7 @@ module.exports = (sequelize) => {
 		username: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			unique: true
+			unique: 'username'
 		},
 		email: {
 			type: DataTypes.STRING,
@@ -174,7 +174,7 @@ module.exports = (sequelize) => {
 		phoneNumber: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
-			unique: true
+			unique: 'phoneNumber'
 		},
 	});
 
@@ -301,14 +301,31 @@ module.exports = (sequelize) => {
 	Commande.hasOne(Paiement);
 	Paiement.belongsTo(Commande);
 
-	Commande.hasOne(Adresse);
-	Adresse.belongsToMany(Commande, {through: {model: CommandeAdresse, unique: false}});
+	Commande.hasOne(CommandeAdresse);
+	CommandeAdresse.belongsTo(Commande);
 
-	Commande.hasMany(Article);
+	Adresse.hasMany(CommandeAdresse);
+	CommandeAdresse.belongsTo(Adresse);
+
+	Commande.belongsToMany(Article, {through: {model: CommandeArticle, unique: false}});
 	Article.belongsToMany(Commande, {through: {model: CommandeArticle, unique: false}});
 
-	Commande.hasMany(Menu);
+	Commande.belongsToMany(Menu, {through: {model: CommandeMenu, unique: false}});
 	Menu.belongsToMany(Commande, {through: {model: CommandeMenu, unique: false}});
 
-	return {Restaurant, GerantRestaurant, Menu, Article, Livreur, Commande, Adresse, Utilisateur, Paiement, CommandeArticle};
+	return {
+		Restaurant,
+		GerantRestaurant,
+		Menu,
+		Article,
+		Livreur,
+		Commande,
+		Adresse,
+		Utilisateur,
+		Paiement,
+		CommandeArticle,
+		CommandeAdresse,
+		MenuArticle,
+		CommandeMenu
+	};
 };

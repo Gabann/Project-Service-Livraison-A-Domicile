@@ -16,7 +16,7 @@ const restaurantController = {
 			let managerId = decodedToken.managerId;
 
 			let name = req.body.name;
-			let street = req.body.steet;
+			let street = req.body.street;
 			let city = req.body.city;
 			let postalCode = req.body.postalCode;
 			let country = req.body.country;
