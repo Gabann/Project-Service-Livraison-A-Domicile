@@ -2,11 +2,11 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
-const {sendResponse, getDecodedToken, verifyToken} = require("../utils");
+const {sendResponse, getDecodedToken, verifyToken, generateToken} = require("../utils");
 const {bcryptSaltRounds} = require("../const");
 const {Sequelize} = require("sequelize");
 
-const restaurantManagerController = {
+const managerController = {
 
 	signUp: async (req, res) => {
 		try {
@@ -26,7 +26,7 @@ const restaurantManagerController = {
 			sendResponse(res, 201, "Manager added successfully");
 		} catch (error) {
 			console.error(error);
-			sendResponse(res, 500, error.errors[0].message);
+			sendResponse(res, 500, error);
 		}
 	},
 
@@ -45,13 +45,11 @@ const restaurantManagerController = {
 				return sendResponse(res, 401, "Email or password incorrect");
 			}
 
-			const token = jwt.sign({managerId: manager.id}, process.env.TOKEN_SECRET, {
-				expiresIn: "30d",
-			});
+			const token = generateToken(manager.id, 'manager');
 
 			sendResponse(res, 200, "Successfully logged in", {token: token});
 		} catch (error) {
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 
@@ -59,11 +57,7 @@ const restaurantManagerController = {
 		try {
 			let token = req.headers.authorization.split(" ")[1];
 			let decodedToken = getDecodedToken(token);
-			if (!decodedToken) {
-				return sendResponse(res, 401, "Invalid token");
-			}
-
-			let managerId = decodedToken.managerId;
+			let managerId = decodedToken.id;
 
 			const restaurantLIst = await dataBaseModel.Restaurant.findAll({
 				where: {GerantRestaurantId: managerId},
@@ -76,22 +70,18 @@ const restaurantManagerController = {
 			sendResponse(res, 200, "Restaurants fetched successfully", {restaurantLIst});
 		} catch (error) {
 			console.error(error);
-			sendResponse(res, 500, error.errors[0].message);
+			sendResponse(res, 500, error);
 		}
 	},
 
 	getRestaurantOpenOrders: async (req, res) => {
 		try {
+
 			let token = req.headers.authorization.split(" ")[1];
 			let decodedToken = getDecodedToken(token);
-			if (!decodedToken) {
-				return sendResponse(res, 401, "Invalid token");
-			}
 
-			let managerId = decodedToken.managerId;
+			let managerId = decodedToken.id;
 			let restaurantId = req.body.restaurantId;
-
-			transaction = await sequelize.transaction();
 
 			let restaurant = await dataBaseModel.Restaurant.findOne({
 				where: {id: restaurantId},
@@ -104,6 +94,7 @@ const restaurantManagerController = {
 			if (restaurant.GerantRestaurantId !== managerId) {
 				return sendResponse(res, 401, "You don't have to access this restaurant orders");
 			}
+
 
 			let result = await dataBaseModel.Commande.findAll({
 				where: {
@@ -125,18 +116,12 @@ const restaurantManagerController = {
 
 			sendResponse(res, 200, "Successfully fetched open orders", {result});
 		} catch (error) {
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 
 	confirmOrder: async (req, res) => {
 		try {
-			let token = req.headers.authorization.split(" ")[1];
-			let decodedToken = getDecodedToken(token);
-			if (!decodedToken) {
-				return sendResponse(res, 401, "Invalid token");
-			}
-
 			let orderId = req.body.orderId;
 
 			let order = await dataBaseModel.Commande.findOne({
@@ -156,18 +141,12 @@ const restaurantManagerController = {
 
 			sendResponse(res, 200, "Order confirmed successfully");
 		} catch (error) {
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 
 	cancelOrder: async (req, res) => {
 		try {
-			let token = req.headers.authorization.split(" ")[1];
-			let decodedToken = getDecodedToken(token);
-			if (!decodedToken) {
-				return sendResponse(res, 401, "Invalid token");
-			}
-
 			let orderId = req.body.orderId;
 
 			let order = await dataBaseModel.Commande.findOne({
@@ -187,9 +166,9 @@ const restaurantManagerController = {
 
 			sendResponse(res, 200, "Order cancelled successfully");
 		} catch (error) {
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	}
 };
 
-module.exports = restaurantManagerController;
+module.exports = managerController;

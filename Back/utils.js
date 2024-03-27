@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const {tokenDuration} = require("./const");
 
 function sendResponse(res, statusCode, responseMessage, optionalResponse = {}) {
 	res.status(statusCode).json({message: responseMessage, ...optionalResponse});
@@ -23,8 +24,14 @@ function getDecodedToken(token) {
 	return jwt.decode(token);
 }
 
+function generateToken(id, role) {
+	return jwt.sign({id: id, role: role}, process.env.TOKEN_SECRET, {
+		expiresIn: tokenDuration,
+	});
+}
+
 module.exports = {
 	sendResponse,
-	verifyToken,
-	getDecodedToken
+	getDecodedToken,
+	generateToken
 };

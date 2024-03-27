@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
-const {sendResponse, verifyToken} = require("../utils");
+const {sendResponse, verifyToken, generateToken} = require("../utils");
 const {bcryptSaltRounds} = require("../const");
 
 const delivererController = {
@@ -17,7 +17,7 @@ const delivererController = {
 			sendResponse(res, 201, "Livreur added successfully");
 		} catch (error) {
 			console.error(error);
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 
@@ -31,35 +31,27 @@ const delivererController = {
 				return sendResponse(res, 401, "Username or password incorrect");
 			}
 
+
 			const isPasswordValid = await bcrypt.compare(password, deliverer.password);
 			if (!isPasswordValid) {
 				return sendResponse(res, 401, "Username or password incorrect");
 			}
 
-			const token = jwt.sign({delivererId: deliverer.id}, process.env.TOKEN_SECRET, {
-				expiresIn: "30d",
-			});
+			const token = generateToken(deliverer.id, 'deliverer');
 
 			sendResponse(res, 200, "Successfully logged in", {token: token});
 		} catch (error) {
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 
 	getAllOpenOrders: async (req, res) => {
 		try {
-			let token = req.headers.authorization.split(" ")[1];
-			let isTokenValid = verifyToken(token);
-
-			if (!isTokenValid) {
-				return sendResponse(res, 401, "Invalid token");
-			}
-
 			let result = await dataBaseModel.Commande.findAll({
 				where: {
 					status: 'En attente de livraison'
 				},
-				attributes: ['id', 'status'],
+				attributes: ['id'],
 				include: [{
 					model: dataBaseModel.CommandeAdresse,
 					include: [{
@@ -73,23 +65,23 @@ const delivererController = {
 				return sendResponse(res, 404, "No open orders found");
 			}
 
-			sendResponse(res, 200, "Successfully fetched open orders", {id: result[0].id, address: result[0].CommandeAdresse.Adresse});
+			let orders = result.map(order => ({
+				id: order.id,
+				address: order.CommandeAdresse.Adresse
+			}));
+
+			sendResponse(res, 200, "Successfully fetched open orders", orders);
 		} catch (error) {
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 
-	assingOrderToSelf: async (req, res) => {
+	assignOrderToSelf: async (req, res) => {
 		try {
 			let token = req.headers.authorization.split(" ")[1];
-			let isTokenValid = verifyToken(token);
-
-			if (!isTokenValid) {
-				return sendResponse(res, 401, "Invalid token");
-			}
-
 			let decodedToken = jwt.decode(token);
-			let delivererId = decodedToken.delivererId;
+			let delivererId = decodedToken.id;
+
 			let orderId = req.body.orderId;
 
 			let order = await dataBaseModel.Commande.findOne({
@@ -110,7 +102,7 @@ const delivererController = {
 
 			sendResponse(res, 200, "Successfully assigned order to self");
 		} catch (error) {
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	}
 };
