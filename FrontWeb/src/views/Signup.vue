@@ -1,67 +1,67 @@
 <script setup>
-import {computed, ref} from "vue";
-import {useAuthStore} from "../stores/authStore";
-
-import router from "../router/router";
-
-let username = ref('');
-let phoneNumber = ref('');
-let password = ref('');
-let email = ref('');
-let apiResponse = ref('');
-
-//TODO fix dulpicate code with login.vue
-async function submitForm(username, phone, email, password) {
-	//TODO add feedback to user when form submition is prevented
-	if (validUsername.value === 'invalid' || validPhoneNumber.value === 'invalid' || validPassword.value === 'invalid' || validEmail.value === 'invalid') {
-		return;
-	}
-
-	apiResponse.value = await useAuthStore().post(`signup`, {username: username, phoneNumber: phoneNumber, email: email, password: password});
-
-	//Auto login after signup
-	apiResponse.value = await useAuthStore().post(`logIn`, {username: username, password: password});
-	if (apiResponse.value.token) {
-		Cookies.set('token', apiResponse.value.token);
-		router.push('/ListRestaurants');
-	}
-}
-
-let validUsername = computed(() => {
-	// At least 3 char long
-	// Only letters and numbers
-	let regex = /^[a-zA-Z0-9]{3,}$/;
-	return regex.test(username.value) ? 'valid' : 'invalid';
-
-});
-
-let validPhoneNumber = computed(() => {
-  // Au moins 8 caractères de long
-  // Only numbers
-  let regex = /^[0-9]{8,}$/;
-  return regex.test(phoneNumber.value) ? 'valid' : 'invalid';
-});
-
-
-let validPassword = computed(() => {
-	// At least 8 characters long
-	// Contains at least one uppercase letter
-	// Contains at least one lowercase letter
-	// Contains at least one digit
-	// Contains at least one special character
-	let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-	return regex.test(password.value) ? 'valid' : 'invalid';
-});
-
-let validEmail = computed(() => {
-	// At least 8 characters long
-	// Contains at least one uppercase letter
-	// Contains at least one lowercase letter
-	// Contains at least one digit
-	// Contains at least one special character
-	let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-	return regex.test(email.value) ? 'valid' : 'invalid';
-});
+// import {computed, ref} from "vue";
+// import {useAuthStore} from "../stores/authStore";
+//
+// import router from "../router/router";
+//
+// let username = ref('');
+// let phoneNumber = ref('');
+// let password = ref('');
+// let email = ref('');
+// let apiResponse = ref('');
+//
+// //TODO fix dulpicate code with login.vue
+// async function submitForm(username, phone, email, password) {
+// 	//TODO add feedback to user when form submition is prevented
+// 	if (validUsername.value === 'invalid' || validPhoneNumber.value === 'invalid' || validPassword.value === 'invalid' || validEmail.value === 'invalid') {
+// 		return;
+// 	}
+//
+// 	apiResponse.value = await useAuthStore().post(`signup`, {username: username, phoneNumber: phoneNumber, email: email, password: password});
+//
+// 	//Auto login after signup
+// 	apiResponse.value = await useAuthStore().post(`logIn`, {username: username, password: password});
+// 	if (apiResponse.value.token) {
+// 		Cookies.set('token', apiResponse.value.token);
+// 		router.push('/ListRestaurants');
+// 	}
+// }
+//
+// let validUsername = computed(() => {
+// 	// At least 3 char long
+// 	// Only letters and numbers
+// 	let regex = /^[a-zA-Z0-9]{3,}$/;
+// 	return regex.test(username.value) ? 'valid' : 'invalid';
+//
+// });
+//
+// let validPhoneNumber = computed(() => {
+//   // Au moins 8 caractères de long
+//   // Only numbers
+//   let regex = /^[0-9]{8,}$/;
+//   return regex.test(phoneNumber.value) ? 'valid' : 'invalid';
+// });
+//
+//
+// let validPassword = computed(() => {
+// 	// At least 8 characters long
+// 	// Contains at least one uppercase letter
+// 	// Contains at least one lowercase letter
+// 	// Contains at least one digit
+// 	// Contains at least one special character
+// 	let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+// 	return regex.test(password.value) ? 'valid' : 'invalid';
+// });
+//
+// let validEmail = computed(() => {
+// 	// At least 8 characters long
+// 	// Contains at least one uppercase letter
+// 	// Contains at least one lowercase letter
+// 	// Contains at least one digit
+// 	// Contains at least one special character
+// 	let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+// 	return regex.test(email.value) ? 'valid' : 'invalid';
+// });
 </script>
 
 <template>

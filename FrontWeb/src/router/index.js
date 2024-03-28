@@ -6,7 +6,7 @@ import LoginView from '../views/LoginView.vue'
 import MealView from '../views/MealView.vue'
 import OrderView from '../views/OrderView.vue'
 import DashboardView from '../views/DashboardView.vue'
-import NotFoundView from '../views/NotFoundView.vue'
+import NotFoundView from '../views/NotFound.vue';
 import Signup from '../views/Signup.vue'
 import UserRestaurantDetailsView from "../views/User/UserRestaurantDetailsView.vue";
 import UserRestaurantListView from "../views/User/UserRestaurantListView.vue";

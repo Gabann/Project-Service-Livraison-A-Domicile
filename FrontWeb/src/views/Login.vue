@@ -1,8 +1,8 @@
 <script setup>
 import {ref} from "vue";
-import {useApiStore} from "@/stores/apiStore";
-import Cookies from 'js-cookie';
-import router from '../router/vueRouter';
+// import {useApiStore} from "@/stores/apiStore";
+// import Cookies from 'js-cookie';
+// import router from '../router/vueRouter';
 
 let username = ref("");
 let password = ref("");

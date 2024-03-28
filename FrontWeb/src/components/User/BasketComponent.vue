@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {useUserBasketStore} from "../../store/User/userBasketStore";
 import BasketItemCardComponent from "./BasketItemCardComponent.vue";
 
@@ -9,6 +9,11 @@ let street = ref('');
 let city = ref('');
 let postalCode = ref('');
 let country = ref('');
+
+let totalPrice = computed(() => {
+	return basketStore.articlesList.reduce((total, article) => total + article.price, 0);
+});
+
 </script>
 
 <template>
@@ -32,6 +37,8 @@ let country = ref('');
 
 			<label for="country">Country:</label>
 			<input id="country" v-model="country" placeholder="Enter country" required type="text">
+
+			<p>Total price: {{ totalPrice }}€</p>
 
 			<button type="submit">Confirm order</button>
 
