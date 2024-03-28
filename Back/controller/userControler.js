@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
-const {sendResponse} = require("../utils");
+const {sendResponse, getDecodedToken, generateToken} = require("../utils");
 const {bcryptSaltRounds} = require("../const");
 
 const userController = {
@@ -19,7 +19,7 @@ const userController = {
 			sendResponse(res, 201, "User added successfully");
 		} catch (error) {
 			console.error(error);
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 
@@ -38,13 +38,53 @@ const userController = {
 				return sendResponse(res, 401, "Username or password incorrect");
 			}
 
-			const token = jwt.sign({userId: user.id}, process.env.TOKEN_SECRET, {
-				expiresIn: "30d",
-			});
+			const token = generateToken(user.id, 'user');
 
 			sendResponse(res, 200, "Successfully logged in", {token: token});
 		} catch (error) {
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
+		}
+	},
+
+	getAllRestaurants: async (req, res) => {
+		try {
+			const restaurantLIst = await dataBaseModel.Restaurant.findAll({
+				include: [{
+					model: dataBaseModel.Adresse,
+					attributes: ["street", "city", "postalCode", "country"],
+				}],
+			});
+
+			sendResponse(res, 200, "Restaurants fetched successfully", {restaurantLIst});
+		} catch (error) {
+			console.error(error);
+			sendResponse(res, 500, error);
+		}
+	},
+
+	getAllArticlesFromRestaurant: async (req, res) => {
+		try {
+			let restaurantId = req.body.restaurantId;
+
+			let restaurant = await dataBaseModel.Restaurant.findOne({
+				where: {id: restaurantId},
+			});
+
+			if (!restaurant) {
+				return sendResponse(res, 404, "Restaurant not found");
+			}
+
+			const articleList = await dataBaseModel.Article.findAll({
+				include: [{
+					model: dataBaseModel.Restaurant,
+					where: {id: restaurantId}
+				}],
+			});
+
+			sendResponse(res, 200, "Articles fetched successfully", {articleList});
+		} catch (error) {
+			console.error(error);
+			sendResponse(res, 500, error);
 		}
 	},
 };

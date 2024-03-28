@@ -20,7 +20,7 @@ function authPasswordInput(event) {
 const submitForm = async () => {
     try {
         authStore.logIn(email, password);
-        router.push('/Meal');
+        router.push('/Dashboard');
     } catch (error) {
         alert(error.message);
     }
@@ -30,39 +30,37 @@ const submitForm = async () => {
 
 <template>
     <main class="mainContainer">
-        
+
         <div class="cardContainer">
 
-        <div class="card">
-            <form class="auth-form" action="#" @submit.prevent="submitForm">
+            <div class="card">
+                <form class="auth-form" action="#" @submit.prevent="submitForm">
 
-                <label for="auth_email">Email</label>
-                <input type="email" name="auth_email" id="auth_email" placeholder="Enter your email"
-                    @input="authEmailInput">
+                    <label for="auth_email">Email</label>
+                    <input type="email" name="auth_email" id="auth_email" placeholder="Enter your email"
+                        @input="authEmailInput">
 
-                <label for="auth_password">Mot de Passe</label>
-                <input type="password" name="auth_password" id="auth_password" placeholder="Enter your password"
-                    @input="authPasswordInput">
+                    <label for="auth_password">Mot de Passe</label>
+                    <input type="password" name="auth_password" id="auth_password" placeholder="Enter your password"
+                        @input="authPasswordInput">
 
-                <button type="submit" class="btn btn-dark" @click="submitForm()">Connexion</button>
-            </form>
+                    <button type="submit" class="btn btn-dark">Connexion</button>
+                </form>
 
-            <span>
-                <RouterLink to="/SignIn">Créer un compte</RouterLink>
-            </span>
+                <span>
+                    <RouterLink to="/SignIn">Créer un compte</RouterLink>
+                </span>
+            </div>
+
+
         </div>
-
-        
-    </div>
-    <div class="divStyle">
+        <div class="divStyle">
             <h1 class="auth-title">Se connecter</h1>
         </div>
     </main>
 </template>
 
 <style scoped>
-
-
 h1 {
     color: black;
     text-align: center;

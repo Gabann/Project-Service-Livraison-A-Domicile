@@ -8,14 +8,9 @@ const orderController = {
 		let transaction;
 		try {
 			let token = req.headers.authorization.split(" ")[1];
-			let isTokenValid = verifyToken(token);
-
-			if (!isTokenValid) {
-				return sendResponse(res, 401, "Invalid token");
-			}
 
 			let decodedToken = jwt.decode(token);
-			let userId = decodedToken.userId;
+			let userId = decodedToken.id;
 
 			let articleIdArray = req.body.articleIdArray;
 			let street = req.body.street;
@@ -72,7 +67,7 @@ const orderController = {
 		} catch (error) {
 			if (transaction) await transaction.rollback();
 			console.error(error);
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	},
 }

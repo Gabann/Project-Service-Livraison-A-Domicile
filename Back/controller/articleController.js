@@ -1,7 +1,8 @@
-const jwt = require('jsonwebtoken');
+
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
-const {sendResponse, verifyToken} = require("../utils");
+const {sendResponse} = require("../utils");
+const jwt = require("jsonwebtoken");
 
 const articleController = {
 
@@ -10,14 +11,9 @@ const articleController = {
 
 		try {
 			let token = req.headers.authorization.split(" ")[1];
-			let isTokenValid = verifyToken(token);
 			let decodedToken = jwt.decode(token);
-			let managerId = decodedToken.managerId;
-
-			if (!isTokenValid) {
-				return sendResponse(res, 401, "Invalid token");
-			}
-
+			let managerId = decodedToken.id;
+			
 			let restaurantId = req.body.restaurantId;
 			let name = req.body.name;
 			let ingredients = req.body.ingredients;
@@ -56,7 +52,7 @@ const articleController = {
 		} catch (error) {
 			if (transaction) await transaction.rollback();
 			console.error(error);
-			sendResponse(res, 500, error.message);
+			sendResponse(res, 500, error);
 		}
 	}
 };

@@ -1,2 +1,7 @@
 let bcryptSaltRounds = 10;
-module.exports.bcryptSaltRounds = bcryptSaltRounds;
+let tokenDuration = '30d';
+
+module.exports = {
+	bcryptSaltRounds,
+	tokenDuration
+};
