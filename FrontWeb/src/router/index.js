@@ -6,7 +6,8 @@ import LoginView from '../views/LoginView.vue'
 import MealView from '../views/MealView.vue'
 import OrderView from '../views/OrderView.vue'
 import DashboardView from '../views/DashboardView.vue'
-import NotFoundView from '../views/NotFoundView.vue'
+import NotFoundView from '../views/NotFound.vue';
+import Signup from '../views/Signup.vue'
 import UserRestaurantDetailsView from "../views/User/UserRestaurantDetailsView.vue";
 import UserRestaurantListView from "../views/User/UserRestaurantListView.vue";
 import UserLogIn from "../views/User/UserLogInView.vue";
@@ -23,7 +24,8 @@ const router = createRouter({
         { path: '/Meal', component: MealView, /*meta: { requiresAuth: true }*/},
         { path: '/Order', component: OrderView, /*meta: { requiresAuth: true }*/},
         { path: '/Dashboard', component: DashboardView, /*meta: { requiresAuth: true}*/},
-        { path: '/not-found', component: NotFoundView },
+        { path: '/not-found', component: NotFound },
+        { path: '/userSignup', component: Signup },
 	    {path: '/UserLogIn', component: UserLogIn},
 	    {path: '/UserSignUp', component: UserSignUp},
 	    {path: '/UserRestaurantList', component: UserRestaurantListView},

@@ -20,7 +20,7 @@ export const useUserBasketStore = defineStore('userBasketStore', () => {
 		let articleIdList = articlesList.value.map((article) => {
 			return article.id;
 		});
-		
+
 		console.log(localStorage.getItem('token'));
 
 		axios.post(baseUrl + '/user/makeOrder', {
@@ -29,8 +29,9 @@ export const useUserBasketStore = defineStore('userBasketStore', () => {
 			city: city,
 			postalCode: postalCode,
 			country: country,
-		}, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}).then((response) => {
-			console.log(response);
+		}, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
+			.then((response) => {
+				console.log(response);
 		}).catch((error) => {
 			console.error(error);
 		});
