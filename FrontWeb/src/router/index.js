@@ -7,8 +7,9 @@ import MealView from '../views/MealView.vue'
 import OrderView from '../views/OrderView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
-import UserLogIn from "../views/User/UserLogIn.vue";
-import UserSignUp from "../views/User/UserSignUp.vue";
+import UserRestaurantListView from "../views/User/UserRestaurantListView.vue";
+import UserLogIn from "../views/User/UserLogInView.vue";
+import UserSignUp from "../views/User/UserSignUpView.vue";
 
 
 const router = createRouter({
@@ -24,6 +25,7 @@ const router = createRouter({
         { path: '/not-found', component: NotFoundView },
 	    {path: '/UserLogIn', component: UserLogIn},
 	    {path: '/UserSignUp', component: UserSignUp},
+	    {path: '/UserRestaurantList', component: UserRestaurantListView},
     ],
 });
 

@@ -3,7 +3,7 @@ import {defineStore} from "pinia";
 
 const baseUrl = 'http://localhost:3000/api';
 
-export const useUserStore = defineStore('userStore', () => {
+export const useUserAuthStore = defineStore('userAuthStore', () => {
 	function logIn(username, password) {
 		axios.post(baseUrl + '/user/logIn', {
 			username: username,
@@ -32,6 +32,14 @@ export const useUserStore = defineStore('userStore', () => {
 		localStorage.removeItem("token");
 	}
 
-	return {logIn, logOut, signUp};
+	function getRestaurantList() {
+		axios.get(baseUrl + '/user/getAllRestaurant', {}).then((response) => {
+			console.log(response.data);
+		}).catch((error) => {
+			console.error(error);
+		});
+	}
+
+	return {logIn, logOut, signUp, getRestaurantList};
 });
 

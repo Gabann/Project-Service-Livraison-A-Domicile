@@ -1,8 +1,8 @@
 <script setup>
 import {ref} from "vue";
-import {useUserStore} from "../../store/userStore";
+import {useUserAuthStore} from "../../store/User/userAuthStore";
 
-let userStore = useUserStore();
+let userStore = useUserAuthStore();
 
 let username = ref("");
 let password = ref("");
