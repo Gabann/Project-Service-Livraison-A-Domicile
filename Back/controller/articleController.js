@@ -26,10 +26,16 @@ const articleController = {
 			let preparationTimeSec = req.body.preparationTimeSec;
 
 
-			let restaurant = await dataBaseModel.Restaurant.findOne({where: {id: restaurantId, GerantRestaurantId: managerId}});
+			let restaurant = await dataBaseModel.Restaurant.findOne({
+				where: {id: restaurantId},
+			});
 
 			if (!restaurant) {
-				return sendResponse(res, 401, "You don't have access to this restaurant");
+				return sendResponse(res, 404, "Restaurant not found");
+			}
+
+			if (restaurant.GerantRestaurantId !== managerId) {
+				return sendResponse(res, 401, "You don't have the permission to delete this restaurant");
 			}
 
 			transaction = await sequelize.transaction();
@@ -50,7 +56,7 @@ const articleController = {
 		} catch (error) {
 			if (transaction) await transaction.rollback();
 			console.error(error);
-			sendResponse(res, 500, error.errors[0].message);
+			sendResponse(res, 500, error.message);
 		}
 	}
 };

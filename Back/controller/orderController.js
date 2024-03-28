@@ -17,24 +17,56 @@ const orderController = {
 			let decodedToken = jwt.decode(token);
 			let userId = decodedToken.userId;
 
-			transaction = await sequelize.transaction();
-
 			let articleIdArray = req.body.articleIdArray;
+			let street = req.body.street;
+			let city = req.body.city;
+			let postalCode = req.body.postalCode;
+			let country = req.body.country;
 
-			let order = await dataBaseModel.Commande.create({
-				UtilisateurId: userId,
-				status: "En attente"
+			let address = await sequelize.transaction(async (transaction) => {
+				let addressQuery = await dataBaseModel.Adresse.findOne({
+					where: {
+						street: street,
+						city: city,
+						postalCode: postalCode,
+						country: country
+					}
+				}, {transaction});
+
+				if (addressQuery) {
+					return addressQuery;
+				} else {
+					return await dataBaseModel.Adresse.create({
+						street: street,
+						city: city,
+						postalCode: postalCode,
+						country: country,
+					}, {transaction});
+				}
 			});
 
+			let order = await sequelize.transaction(async (transaction) => {
+				let order = await dataBaseModel.Commande.create({
+					UtilisateurId: userId,
+					status: "En attente de confirmation"
+				}, {transaction});
+
+				await dataBaseModel.CommandeAdresse.create({
+					CommandeId: order.id,
+					AdresseId: address.id
+				}, {transaction});
+
+				return order;
+			});
 
 			for (const item of articleIdArray) {
-				await dataBaseModel.CommandeArticle.create({
-					CommandeId: order.id,
-					ArticleId: item,
+				await sequelize.transaction(async (transaction) => {
+					await dataBaseModel.CommandeArticle.create({
+						CommandeId: order.id,
+						ArticleId: item,
+					}, {transaction});
 				});
 			}
-
-			await transaction.commit();
 
 			sendResponse(res, 201, "Order added successfully");
 		} catch (error) {
@@ -42,7 +74,7 @@ const orderController = {
 			console.error(error);
 			sendResponse(res, 500, error.message);
 		}
-	}
-};
+	},
+}
 
 module.exports = orderController;
