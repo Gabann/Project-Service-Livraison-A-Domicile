@@ -4,7 +4,7 @@ import {ref, defineEmits} from 'vue';
 const newFlatText = ref('');
 const emit = defineEmits(['create-order']);
 
-function emitAddFlat(){
+function emitAddOrder(){
   emit('create-order', newOrderText.value);
   newOrderText.value = '';
 }

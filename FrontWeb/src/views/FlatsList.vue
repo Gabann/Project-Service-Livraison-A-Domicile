@@ -33,7 +33,7 @@ export default {
     const restaurantId = this.$route.params.restaurantId;
 
     // Requête à l'API REST ici pour récupérer les plats du restaurant
-    axios.get('http://10.125.52.56:3000/api/restaurant/${restaurantId}/menu')
+    axios.get(`http://10.125.52.56:3000/api/restaurant/${restaurantId}/menu`)
       .then(response => {
         this.menuItems = response.data;
       })
