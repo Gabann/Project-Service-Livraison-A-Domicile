@@ -18,6 +18,8 @@ onMounted(() => {
 	<div v-for="(article) in restaurantStore.articleList">
 		<RestaurantArticleCard :article="article"></RestaurantArticleCard>
 	</div>
+
+	<BasketComponent></BasketComponent>
 </template>
 
 <style scoped>

@@ -17,7 +17,7 @@ function logIn() {
 		<form class="container" @submit.prevent="logIn">
 			<input v-model="username" placeholder="Username" type="text">
 			<input v-model="password" placeholder="Password" type="password">
-			<button @click="logIn">Log In</button>
+			<button type="submit">Log In</button>
 		</form>
 
 		<button @click="userStore.logOut">Log Out</button>
