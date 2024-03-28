@@ -10,6 +10,7 @@ export const useUserRestaurantStore = defineStore('userRestaurantStore', () => {
 	let articleList = ref([]);
 
 	function getRestaurantList() {
+		restaurantList.value = [];
 		axios.get(baseUrl + '/user/getAllRestaurant', {}).then((response) => {
 			console.log(response.data);
 			for (const restaurant of response.data.restaurantLIst) {
@@ -22,6 +23,7 @@ export const useUserRestaurantStore = defineStore('userRestaurantStore', () => {
 	}
 
 	function getRestaurantArticles(restaurantId) {
+		articleList.value = [];
 		axios.post(baseUrl + '/user/getAllArticlesFromRestaurant', {
 			restaurantId: restaurantId,
 		}).then((response) => {
