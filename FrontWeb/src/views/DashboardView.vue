@@ -16,12 +16,12 @@ import ListRestaurantComponent from '../components/ListRestaurantComponent.vue';
 
 <style scoped>
 
-.mainContainer {
+/* .mainContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
-}
+} */
 
 .cardContainer {
     display: flex;
@@ -30,15 +30,9 @@ import ListRestaurantComponent from '../components/ListRestaurantComponent.vue';
     align-items: center;
 }
 
-h1 {
-    color: black;
-    text-align: center;
-    margin-top: 100px;
-}
-
 .divStyle {
     flex: 0.5;
-    background-color: var(--secondary-color);
+    background-color: var(--background-app);
     width: 100%;
     height: 100%;
     /* align-items: center;

@@ -26,29 +26,29 @@ const logOut = async () => {
             </div>
             <ul>
                 <li>
-                    <span v-if="!isLoggedIn">
+                    <span >
                         <RouterLink to="/SignIn">Ajoutez votre restaurant</RouterLink>
                     </span>
                 </li>
                 <li>
-                    <span v-if="isLoggedIn">
+                    <span>
                         <RouterLink to="/Meal">Meal</RouterLink>
                     </span>
                 </li>
                 <li>
-                    <span v-if="isLoggedIn">
+                    <span >
                         <RouterLink to="/Order">Order</RouterLink>
                     </span>
                 </li>
                 <li>
-                    <span v-if="isLoggedIn">
+                    <span >
                         <RouterLink to="/Dashboard">Dashboard</RouterLink>
                     </span>
                 </li>
                 <li>
                     <div class="is-logged-in-btn">
-                        <RouterLink to="/Login" v-if="!isLoggedIn" class="is-logged-in-btn-true">Log In</RouterLink>
-                        <span v-if="isLoggedIn">
+                        <RouterLink to="/Login" class="is-logged-in-btn-true">Log In</RouterLink>
+                        <span >
                             <RouterLink to="/Login" @click="logOut" class="is-logged-in-btn-false">Log Out</RouterLink>
                         </span>
                     </div>

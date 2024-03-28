@@ -5,17 +5,19 @@ import axios from 'axios';
 const API_URL = 'http://10.125.52.56:3000/api/manager/';
 
 export const useRestaurantStore = defineStore('restaurants', () => {
-    const restaurants = ref();
+    const restaurants = ref([]);
 
-    const token = ref(localStorage.getItem('token'));
-    if (!token) {
-        throw new Error('Authorization token is missing');
-    }
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //     throw new Error('Authorization token is missing');
+    // }
 
     async function getRestaurants() {
+        // const token = localStorage.getItem('token')
+        // console.log(token)
         const response = await axios
             .get(API_URL + 'getAllOwnedRestaurant', {
-                headers: { Authorization: `Bearer ${token.value}` }
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
             .then((response) => {
                 restaurants.value = response.data;
@@ -29,6 +31,7 @@ export const useRestaurantStore = defineStore('restaurants', () => {
     }
 
     async function addRestaurant(name, street, city, postalCode, country) {
+        // const token = localStorage.getItem('token')
         console.log(token);
         const response = await axios
             .post(API_URL + 'addRestaurant', {
@@ -37,9 +40,12 @@ export const useRestaurantStore = defineStore('restaurants', () => {
                 city: city,
                 postalCode: postalCode,
                 country: country,
-            }, {headers: { Authorization: `Bearer ${token.value}` }})
+            }, {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
             .then((response) => {
-                localStorage.setItem('restaurant', JSON.stringify(response.data))})
+                if(response){
+                    getRestaurants();
+                }
+                })
             .catch((error) => {
                 console.error('Error:', error.response.data);
             })

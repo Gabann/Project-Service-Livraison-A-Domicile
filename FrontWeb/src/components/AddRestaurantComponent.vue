@@ -62,7 +62,7 @@ const submitForm = async () => {
                     <label for="restaurantCountry">Pays</label>
                     <input type="text" @input="createCountryInput" id="restaurantCountry" placeholder="Pays">
 
-                    <button type="submit" class="btn btn-dark">Ajouter un restaurant</button>
+                    <button type="submit" class="btn">Ajouter un restaurant</button>
                 </form>
 
             </div>
@@ -84,11 +84,24 @@ form input {
     width: 15rem;
     margin: 1rem;
     font-family: 'Helvetica Neue';
+    border: 1px solid var(--color-title);
+    border-radius: 5px;
 }
 
 .card {
     width: fit-content;
     text-align: center;
+    border: none;
+    background-color: var(--background-app);
+}
+
+.btn {
+    background-color: var(--background-buttons);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
 }
 
 /* .cardContainer {

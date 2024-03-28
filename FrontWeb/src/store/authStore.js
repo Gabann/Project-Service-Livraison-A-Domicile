@@ -7,11 +7,9 @@ const API_URL = 'http://10.125.52.56:3000/api/manager/';
 
 export const useAuthStore = defineStore('manager', () => {
     const router = useRouter();
-    const currentManager = ref(null);
+    // const currentManager = ref(null);
     // const token = ref('');
-    const isLoggedIn = ref(
-        localStorage.getItem('isLoggedIn') === 'true' ? true : false
-    );
+    const isLoggedIn = ref(false);
 
     async function logIn(email, password) {
         const response = await axios.post(API_URL + 'logIn', {
@@ -27,11 +25,13 @@ export const useAuthStore = defineStore('manager', () => {
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('token', response.data.token);
             console.log(response.data);
+
         }
         return response.data;
     }
 
     function logOut() {
+        console.log(localStorage.getItem('token'))
         // currentManager.value = null;
         isLoggedIn.value = false;
         // localStorage.removeItem('currentManager');
@@ -39,6 +39,7 @@ export const useAuthStore = defineStore('manager', () => {
         
         localStorage.removeItem('token');
         console.log('logged out');
+        console.log(localStorage.getItem('token'))
         router.push('/Login')
     }
 
@@ -65,15 +66,15 @@ export const useAuthStore = defineStore('manager', () => {
     //     }
     // }
 
-    // const checkLoginStatus = () => {
-    //     const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    //     if (loggedIn) {
-    //         currentManager.value = localStorage.getItem('currentManager');
-    //         isLoggedIn.value = true;
-    //     }
-    // };
+    const checkLoginStatus = () => {
+        const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (loggedIn) {
+            currentManager.value = localStorage.getItem('currentManager');
+            isLoggedIn.value = true;
+        }
+    };
 
-    return { logIn, logOut, register, currentManager, isLoggedIn };
+    return { logIn, logOut, register, isLoggedIn, checkLoginStatus };
 })
 
 

@@ -19,7 +19,7 @@ function authPasswordInput(event) {
 
 const submitForm = async () => {
     try {
-        authStore.logIn(email, password);
+        await authStore.logIn(email, password);
         router.push('/Dashboard');
     } catch (error) {
         alert(error.message);
