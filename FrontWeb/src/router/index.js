@@ -8,6 +8,7 @@ import OrderView from '../views/OrderView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import UserLogIn from "../views/User/UserLogIn.vue";
+import UserSignUp from "../views/User/UserSignUp.vue";
 
 
 const router = createRouter({
@@ -22,6 +23,7 @@ const router = createRouter({
         { path: '/Dashboard', component: DashboardView, /*meta: { requiresAuth: true}*/},
         { path: '/not-found', component: NotFoundView },
 	    {path: '/UserLogIn', component: UserLogIn},
+	    {path: '/UserSignUp', component: UserSignUp},
     ],
 });
 
