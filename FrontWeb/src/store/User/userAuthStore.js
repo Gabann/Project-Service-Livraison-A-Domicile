@@ -9,7 +9,8 @@ export const useUserAuthStore = defineStore('userAuthStore', () => {
 			username: username,
 			password: password
 		}).then((response) => {
-			localStorage.setItem("token", response.data.token);
+			localStorage.setItem('token', response.data.token);
+			console.log(response.data);
 		}).catch((error) => {
 			console.error(error);
 		});

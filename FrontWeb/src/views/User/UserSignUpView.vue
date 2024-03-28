@@ -21,7 +21,7 @@ function signUp() {
 			<input v-model="password" placeholder="Password" type="password">
 			<input v-model="email" placeholder="Email" type="text">
 			<input v-model="phoneNumber" placeholder="Phone Number" type="tel">
-			<button @click="signUp">Sign Up</button>
+			<button type="submit">Sign Up</button>
 		</form>
 	</div>
 </template>

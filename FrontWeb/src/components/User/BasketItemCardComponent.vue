@@ -2,15 +2,10 @@
 defineProps({
 	article: Object,
 });
-
-import {useUserBasketStore} from "../../store/User/userBasketStore";
-
-let basketStore = useUserBasketStore();
 </script>
 
 <template>
-	<div class="card" @click="basketStore.addArticleToBasket(article)">
-		<!--		<img alt="Card image" class="card-img" src="https://via.placeholder.com/150">-->
+	<div class="card">
 		<div class="card-body">
 			<h2 class="card-title">{{ article.name }}</h2>
 			<p class="card-text">Type: {{ article.type }}</p>
