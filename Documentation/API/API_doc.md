@@ -28,9 +28,9 @@ Base url: 10.125.52.56:3000/api
    - Authentication: No
     - Request Body: None
 
-1. `GET /user/getAllArticlesFromRestaurant`
+1. `POST /user/getAllArticlesFromRestaurant`
     - Description: Endpoint to get all articles from a specific restaurant.
-    - Authentication: Yes
+   - Authentication: No
         - `restaurantId`: The id of the restaurant. This field is required.
     - Example: `{ "restaurantId": 1 }`
 

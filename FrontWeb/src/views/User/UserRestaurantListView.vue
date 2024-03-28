@@ -1,6 +1,6 @@
 <script setup>
 import {onMounted} from "vue";
-import RestaurantCard from "../../components/User/RestaurantCardComponent.vue";
+import RestaurantCardComponent from "../../components/User/RestaurantCardComponent.vue";
 import {useUserRestaurantStore} from "../../store/User/userRestaurantStore";
 
 let restaurantStore = useUserRestaurantStore();
@@ -12,7 +12,7 @@ onMounted(() => {
 
 <template>
 	<div v-for="(restaurant) in restaurantStore.restaurantList">
-		<restaurant-card :restaurant="restaurant"></restaurant-card>
+		<RestaurantCardComponent :restaurant="restaurant"></RestaurantCardComponent>
 	</div>
 
 </template>

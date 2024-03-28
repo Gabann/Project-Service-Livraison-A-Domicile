@@ -7,6 +7,7 @@ const baseUrl = 'http://localhost:3000/api';
 export const useUserRestaurantStore = defineStore('userRestaurantStore', () => {
 
 	let restaurantList = ref([]);
+	let articleList = ref([]);
 
 	function getRestaurantList() {
 		axios.get(baseUrl + '/user/getAllRestaurant', {}).then((response) => {
@@ -20,6 +21,19 @@ export const useUserRestaurantStore = defineStore('userRestaurantStore', () => {
 		});
 	}
 
-	return {getRestaurantList, restaurantList};
+	function getRestaurantArticles(restaurantId) {
+		axios.post(baseUrl + '/user/getAllArticlesFromRestaurant', {
+			restaurantId: restaurantId,
+		}).then((response) => {
+			console.log(response);
+			for (const article of response.data.articleList) {
+				articleList.value.push(article);
+			}
+		}).catch((error) => {
+			console.error(error);
+		});
+	}
+
+	return {getRestaurantList, restaurantList, getRestaurantArticles, articleList};
 });
 

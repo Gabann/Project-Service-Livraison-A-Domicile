@@ -5,16 +5,18 @@ defineProps({
 </script>
 
 <template>
-	<div class="card">
-		<!--		<img alt="Card image" class="card-img" src="https://via.placeholder.com/150">-->
-		<div class="card-body">
-			<h2 class="card-title">{{ restaurant.name }}</h2>
-			<p class="card-text">{{ restaurant.Adresse.city }}</p>
-			<p class="card-text">{{ restaurant.Adresse.street }}</p>
-			<p class="card-text">{{ restaurant.Adresse.postalCode }}</p>
-			<p class="card-text">{{ restaurant.Adresse.country }}</p>
+	<router-link :to="`/UserRestaurantDetails/${restaurant.id}`">
+		<div class="card">
+			<!--		<img alt="Card image" class="card-img" src="https://via.placeholder.com/150">-->
+			<div class="card-body">
+				<h2 class="card-title">{{ restaurant.name }}</h2>
+				<p class="card-text">{{ restaurant.Adresse.city }}</p>
+				<p class="card-text">{{ restaurant.Adresse.street }}</p>
+				<p class="card-text">{{ restaurant.Adresse.postalCode }}</p>
+				<p class="card-text">{{ restaurant.Adresse.country }}</p>
+			</div>
 		</div>
-	</div>
+	</router-link>
 </template>
 
 <style scoped>
