@@ -24,7 +24,7 @@ const router = createRouter({
         { path: '/Meal', component: MealView, /*meta: { requiresAuth: true }*/},
         { path: '/Order', component: OrderView, /*meta: { requiresAuth: true }*/},
         { path: '/Dashboard', component: DashboardView, /*meta: { requiresAuth: true}*/},
-        { path: '/not-found', component: NotFoundView },
+        { path: '/not-found', component: NotFound },
         { path: '/userSignup', component: Signup },
 	    {path: '/UserLogIn', component: UserLogIn},
 	    {path: '/UserSignUp', component: UserSignUp},
