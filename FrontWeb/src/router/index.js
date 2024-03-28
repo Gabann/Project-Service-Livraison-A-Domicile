@@ -7,6 +7,7 @@ import MealView from '../views/MealView.vue'
 import OrderView from '../views/OrderView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
+import Signup from '../views/Signup.vue'
 
 
 const router = createRouter({
@@ -20,6 +21,7 @@ const router = createRouter({
         { path: '/Order', component: OrderView },
         { path: '/Dashboard', component: DashboardView },
         { path: '/not-found', component: NotFoundView },
+        { path: '/userSignup', component: Signup },
     ],
 });
 

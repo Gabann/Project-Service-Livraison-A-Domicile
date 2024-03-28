@@ -1,11 +1,11 @@
 <script setup>
-import { useRestaurantsStore } from "./stores/restaurantsStore";
+import { useOderStore } from "./stores/OrderStore";
 
-const restaurantsStore = useRestaurantsStore();
+const orderStore = useOrderStore();
 
 const props = defineProps(["restaurantId"]);
 
-const restaurantFound = restaurantsStore.restaurants.find((r) => r.id === props.restaurantId);
+const OrderFound = restaurantsStore.restaurants.find((r) => r.id === props.restaurantId);
 
 </script>
 

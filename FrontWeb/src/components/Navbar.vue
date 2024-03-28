@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <nav>
       <!-- Boutons et liens de navigation -->
       <router-link to="/">Accueil</router-link>
@@ -17,4 +17,4 @@
   <style scoped>
   /* Styles CSS spécifiques à la barre de navigation */
   </style>
-  
+   -->

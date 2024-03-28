@@ -2,11 +2,11 @@
 import {ref, defineEmits} from 'vue';
 
 const newFlatText = ref('');
-const emit = defineEmits(['add-flat']);
+const emit = defineEmits(['create-order']);
 
 function emitAddFlat(){
-  emit('add-flat', newFlatText.value);
-  newFlatText.value = '';
+  emit('create-order', newOrderText.value);
+  newOrderText.value = '';
 }
 
 </script>

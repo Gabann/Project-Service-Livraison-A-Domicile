@@ -1,8 +1,8 @@
 <script setup>
 import {computed, ref} from "vue";
-import {useApiStore} from "@/stores/apiStore";
-import Cookies from "js-cookie";
-import router from "@/router/vueRouter";
+import {useAuthStore} from "../stores/authStore";
+
+import router from "../router/router";
 
 let username = ref('');
 let phoneNumber = ref('');
@@ -17,10 +17,10 @@ async function submitForm(username, phone, email, password) {
 		return;
 	}
 
-	apiResponse.value = await useApiStore().post(`signup`, {username: username, phoneNumber: phoneNumber, email: email, password: password});
+	apiResponse.value = await useAuthStore().post(`signup`, {username: username, phoneNumber: phoneNumber, email: email, password: password});
 
 	//Auto login after signup
-	apiResponse.value = await useApiStore().post(`logIn`, {username: username, password: password});
+	apiResponse.value = await useAuthStore().post(`logIn`, {username: username, password: password});
 	if (apiResponse.value.token) {
 		Cookies.set('token', apiResponse.value.token);
 		router.push('/ListRestaurants');
@@ -117,7 +117,7 @@ let validEmail = computed(() => {
 						<button class="btn btn-primary" type="submit">Signup</button>
 
                         <button class="btn btn-danger mt-2" type="button" @click="registerWithGoogle">
-                         <img src="chemin/vers/votre/logo/google-logo.png" alt="Google Logo" class="mr-2">S'inscrire avec Google
+                         <img src="https://www.freepnglogos.com/images/google-logo-history-png-2598.html" alt="Google Logo" class="mr-2">S'inscrire avec Google
                         </button>
 					</form>
 

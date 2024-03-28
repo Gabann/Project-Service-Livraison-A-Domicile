@@ -17,12 +17,18 @@
     methods: {
       search() {
         // Logique de recherche d'adresse
+        // Émettre un événement avec les résultats de la recherche
+        this.$emit('search-address', this.address);
       }
     }
   }
   </script>
   
   <style scoped>
-  /* Styles CSS spécifiques au champ d'adresse */
+  
   </style>
   
+
+  
+
+
