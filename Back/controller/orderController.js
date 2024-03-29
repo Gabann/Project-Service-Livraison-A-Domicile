@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
-const {sendResponse, verifyToken} = require("../utils");
+const {sendResponse} = require('../utils');
 
 const orderController = {
 	makeOrder: async (req, res) => {

@@ -60,13 +60,16 @@
 
 Tech stack:
 
+[![Vue.js][VueBadge]][VueUrl]
+[![Pinia][PiniaBadge]][PiniaUrl]
 [![React native][ReactNativeBadge]][ReactNativeUrl]
 [![React Navigation][ReactNavigationBadge]][ReactNavigationUrl]
 [![Redux][ReduxBadge]][ReduxUrl]
-[![Node.js][NodeBadge]][NodeUrl]
 [![Android Studio][AndroidStudioBadge]][AndroidStudioUrl]
-[![Vue.js][VueBadge]][VueUrl]
-[![Pinia][PiniaBadge]][PiniaUrl]
+[![Node.js][NodeBadge]][NodeUrl]
+[![Express][ExpressBagde]][ExpressUrl]
+[![Sequelize][SequelizeBagde]][SequelizeUrl]
+[![MySql][MySqlBagde]][MySqlUrl]
 
 
 
@@ -77,31 +80,84 @@ Tech stack:
 
 ## Getting Started
 
+Rename the .env.example file to '.env' and fill it with credentials to your database
+
 ### Prerequisites
+
+- [MYSQL database](https://www.mysql.com/fr/)
+- [Node.js](https://nodejs.org/en) >= 18
+
+#### Mobile App:
+
+- [Microsoft open JDK](https://learn.microsoft.com/en-us/java/openjdk/download) 17
+- [Android studio](https://developer.android.com/studio)
+- [Android SDK](https://developer.android.com/tools/releases/platforms) 34
+
+Full installation guide can be found [here](https://reactnative.dev/docs/environment-setup?guide=native)
 
 ### Installation
 
+```
+# Clone the project:
+git clone https://github.com/Gabann/Projet-Service-Livraison-A-Domicile
+cd Projet-Service-Livraison-A-Domicile
+
+# Install the dependencies:
+npm install
+cd FrontMobile
+npm install
+
+# Running the application:
+
+# Start the API server:
+npm run express
+
+# Start the web app:
+npm run dev
+
+# Start the mobile app:
+cd ../FrontMobile
+npm run android
+```
+
 <div align="right"><a href="#readme-top">back to top</a></div>
 
 
+[//]: # (<!-- USAGE EXAMPLES -->)
 
-<!-- USAGE EXAMPLES -->
+[//]: # ()
 
-## Usage
+[//]: # (## Usage)
 
-<!-- PREVIEW -->
+[//]: # ()
 
-## Preview
+[//]: # (<div align="right"><a href="#readme-top">back to top</a></div>)
 
-<!-- ROADMAP -->
+[//]: # (<!-- PREVIEW -->)
 
-## Roadmap
+[//]: # (## Preview)
 
-[//]: # (- [ ] Feature)
+[//]: # ()
 
-[//]: # (    - [ ] Nested Feature)
+[//]: # (<div align="right"><a href="#readme-top">back to top</a></div>)
 
-<div align="right"><a href="#readme-top">back to top</a></div>
+[//]: # (<!-- ROADMAP -->)
+
+[//]: # ()
+
+[//]: # (## Roadmap)
+
+[//]: # ()
+
+[//]: # ([//]: # &#40;- [ ] Feature&#41;)
+
+[//]: # ()
+
+[//]: # ([//]: # &#40;    - [ ] Nested Feature&#41;)
+
+[//]: # ()
+
+[//]: # (<div align="right"><a href="#readme-top">back to top</a></div>)
 
 
 
@@ -134,13 +190,6 @@ We welcome contributions from everyone! Follow these steps to contribute:
 
 Distributed under the MIT License. See [`LICENSE`](https://github.com/Gabann/Projet-Service-Livraison-A-Domicile/blob/main/LICENSE) for more
 information.
-
-<div align="right"><a href="#readme-top">back to top</a></div>
-
-
-<!-- CONTACT -->
-
-## Contact
 
 <div align="right"><a href="#readme-top">back to top</a></div>
 
@@ -200,3 +249,15 @@ information.
 [PiniaBadge]: https://img.shields.io/badge/Pinia-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D&color=FDDA0D
 
 [PiniaUrl]: https://pinia.vuejs.org/
+
+[ExpressBagde]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
+
+[ExpressUrl]: https://expressjs.com/fr/
+
+[SequelizeBagde]: https://img.shields.io/badge/sequelize-323330?style=for-the-badge&logo=sequelize&logoColor=blue
+
+[SequelizeUrl]: https://sequelize.org/
+
+[MySqlBagde]: https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white
+
+[MySqlUrl]: https://www.mysql.com/fr/

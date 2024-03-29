@@ -10,5 +10,5 @@ app.use(cors());
 app.use('/', router);
 
 app.listen(port, host, () => {
-	console.log(`Server running on http://${host}:${port}`);
+	console.log(`Server running on https://${host}:${port}`);
 });

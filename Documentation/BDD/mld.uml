@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.adresses</OriginalElement>
+  <nodes>
+    <node x="2245.446928136419" y="448.8767448583096">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.livreurs</node>
+    <node x="2252.446928136419" y="-184.19875303676005">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.adresses</node>
+    <node x="1652.644630066898" y="739.0173809342923">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.paiements</node>
+    <node x="1704.909673430212" y="-126.66182010987876">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.gerantrestaurants</node>
+    <node x="1232.7235935522085" y="-266.143386149629">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.menus</node>
+    <node x="1086.530756142999" y="389.52638239439443">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandearticles</node>
+    <node x="1704.909673430212" y="148.03909866017045">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.restaurants</node>
+    <node x="1401.4080876979297" y="398.1396930572471">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandes</node>
+    <node x="2245.446928136419" y="703.4531704079765">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.utilisateurs</node>
+    <node x="2110.7976744050757" y="182.70173329136088">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandeadresses</node>
+    <node x="1161.7235935522085" y="-12.80722959805098">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.articles</node>
+    <node x="900.1523900785838" y="-94.34961765775253">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandemenus</node>
+    <node x="912.6523900785837" y="-301.79561378216954">464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.menuarticles</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.restaurants" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.gerantrestaurants" relationship="REFERENCES">
+      <point x="-14.999673430211942" y="-77.5" />
+      <point x="-21.499673430211942" y="100.5" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandemenus" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandes" relationship="REFERENCES">
+      <point x="-73.78152395915185" y="77.5" />
+      <point x="917.370866119432" y="590.2691720345633" />
+      <point x="-353.0826705730183" y="80.12947897731624" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandeadresses" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.adresses" relationship="REFERENCES">
+      <point x="101.5" y="0.0" />
+      <point x="2349.447" y="260.2017332913609" />
+      <point x="15.00007186358107" y="112.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.paiements" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.utilisateurs" relationship="REFERENCES">
+      <point x="78.5" y="-12.564210526315833" />
+      <point x="-89.0" y="0.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandes" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.utilisateurs" relationship="REFERENCES">
+      <point x="-8.769792975726887E-5" y="112.0003069427529" />
+      <point x="1753.908" y="663.0" />
+      <point x="2334.447" y="663.0" />
+      <point x="7.186358106991975E-5" y="-100.5001704079765" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandes" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.livreurs" relationship="REFERENCES">
+      <point x="352.5" y="16.237051801062535" />
+      <point x="-89.0" y="0.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.articles" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.menus" relationship="REFERENCES">
+      <point x="0.0" y="-135.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandearticles" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandes" relationship="REFERENCES">
+      <point x="95.5" y="43.113310662852655" />
+      <point x="-352.5" y="0.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.menuarticles" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.articles" relationship="REFERENCES">
+      <point x="78.49960992141632" y="73.65261378216954" />
+      <point x="1144.224" y="-150.643" />
+      <point x="1144.224" y="286.0" />
+      <point x="1321.224" y="286.0" />
+      <point x="4.0644779141985055E-4" y="135.00022959805096" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.articles" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.restaurants" relationship="REFERENCES">
+      <point x="159.5" y="103.34632825822143" />
+      <point x="-87.0" y="0.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.menuarticles" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.menus" relationship="REFERENCES">
+      <point x="78.5" y="58.65222763254053" />
+      <point x="-88.5" y="0.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandearticles" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.articles" relationship="REFERENCES">
+      <point x="0.0" y="-77.5" />
+      <point x="-139.19283740920946" y="135.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.menus" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.restaurants" relationship="REFERENCES">
+      <point x="88.5" y="0.0" />
+      <point x="1578.7638177973517" y="-165.643386149629" />
+      <point x="1578.7638177973517" y="210.53909866017045" />
+      <point x="-87.0" y="-15.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.adresses" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.restaurants" relationship="REFERENCES">
+      <point x="7.186358106991975E-5" y="111.99975303676005" />
+      <point x="2334.447" y="112.0" />
+      <point x="1791.91" y="112.0" />
+      <point x="3.265697880578955E-4" y="-77.50009866017047" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.paiements" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandes" relationship="REFERENCES">
+      <point x="0.0" y="-77.5" />
+      <point x="-22.76345763103177" y="112.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandeadresses" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandes" relationship="REFERENCES">
+      <point x="0.0" y="77.5" />
+      <point x="2212.2976744050757" y="510.1396930572471" />
+      <point x="352.5" y="0.0" />
+    </edge>
+    <edge source="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.commandemenus" target="464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.menus" relationship="REFERENCES">
+      <point x="90.99999999999989" y="-70.6337836081629" />
+      <point x="-88.5" y="78.15998488371358" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.8395713107996703" showDependencies="false" x="1735.7655703063954" y="269.63410919088665" />
+  <SelectedNodes>
+    <node>464f361d-6df3-4e78-ac4a-e938c1cc095c.TABLE:projet_service_livraison_a_domicile.adresses</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Comments</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
