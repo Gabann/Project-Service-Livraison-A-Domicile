@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '../store/authStore.js';
+import { useAuthStore } from '../../store/authStore.js';
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -19,8 +19,8 @@ function authPasswordInput(event) {
 
 const submitForm = async () => {
     try {
-        authStore.logIn(email, password);
-        router.push('/Dashboard');
+        await authStore.logIn(email, password);
+        router.push('/RestaurantDashboard');
     } catch (error) {
         alert(error.message);
     }
@@ -48,7 +48,7 @@ const submitForm = async () => {
                 </form>
 
                 <span>
-                    <RouterLink to="/SignIn">Créer un compte</RouterLink>
+                    <RouterLink to="/RestaurantSignIn">Créer un compte</RouterLink>
                 </span>
             </div>
 
