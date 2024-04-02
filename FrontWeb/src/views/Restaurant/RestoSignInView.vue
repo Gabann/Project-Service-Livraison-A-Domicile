@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '../store/authStore.js';
+import { useAuthStore } from '../../store/authStore.js';
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -51,7 +51,7 @@ const submitForm = async () => {
     try {
         authStore.register(firstName, lastName, email, password);
         // console.log(authStore.register(firstName, lastName, email, password));
-        router.push('/Login');
+        router.push('/RestaurantLogin');
         alert('Account created successfully!');
     } catch (error) {
         alert(error.message);
@@ -66,11 +66,11 @@ const submitForm = async () => {
             <div class="card">
                 <form class="signup-form" action="#" @submit.prevent="submitForm">
 
-                    <label for="signup_firstname">Firstname</label>
+                    <label for="signup_firstname">Prénom</label>
                     <input type="text" name="signup_firstname" id="signup_firstname" placeholder="Enter your firstname"
                         @input="createFirstnameInput">
 
-                    <label for="signup_lastname">Lastname</label>
+                    <label for="signup_lastname">Nom</label>
                     <input type="text" name="signup_lastname" id="signup_lastname" placeholder="Enter your lastname"
                         @input="createLastnameInput">
 
@@ -78,15 +78,15 @@ const submitForm = async () => {
                     <input type="email" name="signup_email" id="signup_email" placeholder="Enter your email"
                         @input="createEmailInput">
 
-                    <label for="signup_password">Password</label>
+                    <label for="signup_password">Mot de Passe</label>
                     <input type="password" name="signup_password" id="signup_password" placeholder="Enter your password"
                         @input="createPasswordInput">
 
-                    <button type="submit" class="btn btn-dark">Create Account</button>
+                    <button type="submit" class="btn btn-dark">Créer un compte</button>
                 </form>
 
                 <span>
-                    <RouterLink to="/Login">Login</RouterLink>
+                    <RouterLink to="/RestaurantLogin">Se connecter</RouterLink>
                 </span>
             </div>
         </div>

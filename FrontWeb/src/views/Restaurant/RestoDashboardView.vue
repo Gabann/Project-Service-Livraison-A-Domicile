@@ -1,6 +1,6 @@
 <script setup>
-import AddRestaurantComponent from '../components/AddRestaurantComponent.vue';
-import ListRestaurantComponent from '../components/ListRestaurantComponent.vue';
+import AddRestaurantComponent from '../../components/Restaurant/AddRestaurantComponent.vue';
+import ListRestaurantComponent from '../../components/Restaurant/ListRestaurantComponent.vue';
 
 </script>
 

@@ -2,7 +2,8 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import axios from 'axios';
 
-const API_URL = 'http://10.125.52.56:3000/api/manager/';
+// const API_URL = 'http://10.125.52.56:3000/api/manager/';
+const API_URL = 'http://localhost:3000/api/manager/';
 
 export const useRestaurantStore = defineStore('restaurants', () => {
     const restaurants = ref([]);
@@ -32,7 +33,7 @@ export const useRestaurantStore = defineStore('restaurants', () => {
 
     async function addRestaurant(name, street, city, postalCode, country) {
         // const token = localStorage.getItem('token')
-        console.log(token);
+        // console.log(token);
         const response = await axios
             .post(API_URL + 'addRestaurant', {
                 name: name,
@@ -48,6 +49,25 @@ export const useRestaurantStore = defineStore('restaurants', () => {
                 })
             .catch((error) => {
                 console.error('Error:', error.response.data);
+            })
+    }
+
+    async function removeRestaurant(id){
+        const response = await axios
+            .delete(API_URL + 'deleteRestaurant', {
+                id: id,
+            }, {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})
+            .then((response) => {
+                console.log()
+                if(response){
+                localStorage.getItem('restaurant', JSON.stringify(response.data));
+
+                    getRestaurants();
+                }
+            }
+            )
+            .catch((error) => {
+                console.error('Error:', error.response.data)
             })
     }
 
@@ -67,5 +87,7 @@ export const useRestaurantStore = defineStore('restaurants', () => {
         return response.data;
     }
 
-    return { restaurants, getRestaurants, addRestaurant, addArticle }
+
+
+    return { restaurants, getRestaurants, addRestaurant, addArticle, removeRestaurant }
 })

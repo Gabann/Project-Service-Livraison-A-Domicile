@@ -1,8 +1,7 @@
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
 const {sequelize} = require("../config/databaseConnection");
 const dataBaseModel = require('../model/databaseModel')(sequelize);
-const {sendResponse, getDecodedToken, generateToken} = require("../utils");
+const {sendResponse, generateToken} = require('../utils');
 const {bcryptSaltRounds} = require("../const");
 
 const userController = {

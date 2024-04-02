@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "cd FrontWeb && vite",
-    "android": "cd FrontMobile && npm i &&  react-native run-android",
+	"android": "cd FrontMobile && npm run android",
     "build": "cd FrontWeb && vite build",
     "preview": "cd FrontWeb && vite preview",
     "express": "nodemon Back/app.js"

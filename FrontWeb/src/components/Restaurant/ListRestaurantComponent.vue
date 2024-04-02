@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUpdated } from 'vue';
-import { useRestaurantStore } from '../store/restaurantStore.js';
+import { useRestaurantStore } from '../../store/restaurantStore.js';
+
 
 const restaurantStore = useRestaurantStore();
 let restaurants = restaurantStore.restaurants;
@@ -10,10 +11,13 @@ onMounted(async () => {
     console.log('Liste', restaurants.restaurantLIst);
 });
 
-// onUpdated(() => {
-//     restaurants = restaurantStore.restaurants;
-//     console.log('Liste', restaurants.restaurantLIst);
-// });
+const deleteRestaurant = async (id) => {
+    try {
+        await restaurantStore.removeRestaurant(id);
+    } catch (error) {
+        alert(error.message);
+    }
+};
 
 </script>
 
@@ -24,14 +28,16 @@ onMounted(async () => {
             <div class="restaurantListContainer">
                 <div class="restaurant-card-container" v-for="r in restaurantStore.restaurants.restaurantLIst"
                     :key="r.id">
+                    <router-link :to="`/RestaurantMeal/${r.id}`">
                     <div class="resto-card" @click="">
                         <h2 class="textStyleTitle">{{ r.name }}</h2>
                         <p class="textStyle">{{ r.Adresse.street }}</p>
                         <p class="textStyle">{{ r.Adresse.city }}</p>
                         <p class="textStyle">{{ r.Adresse.postalCode }}</p>
                         <p class="textStyle">{{ r.Adresse.country }}</p>
-                        <button type="button">Supprimer</button>
+                        <!-- <button type="button" @click.stop="deleteRestaurant(r.id)">Supprimer</button> -->
                     </div>
+                    </router-link>
                 </div>
             </div>
         </div>

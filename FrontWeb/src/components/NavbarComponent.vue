@@ -27,29 +27,29 @@ const logOut = async () => {
             <ul>
                 <li>
                     <span >
-                        <RouterLink to="/SignIn">Ajoutez votre restaurant</RouterLink>
+                        <RouterLink to="/RestaurantSignIn">Créer un compte</RouterLink>
                     </span>
                 </li>
                 <li>
                     <span>
-                        <RouterLink to="/Meal">Meal</RouterLink>
+                        <RouterLink to="/RestaurantMeal">Menus</RouterLink>
                     </span>
                 </li>
                 <li>
                     <span >
-                        <RouterLink to="/Order">Order</RouterLink>
+                        <RouterLink to="/RestaurantOrder">Commandes</RouterLink>
                     </span>
                 </li>
                 <li>
                     <span >
-                        <RouterLink to="/Dashboard">Dashboard</RouterLink>
+                        <RouterLink to="/RestaurantDashboard">Dashboard</RouterLink>
                     </span>
                 </li>
                 <li>
                     <div class="is-logged-in-btn">
-                        <RouterLink to="/Login" class="is-logged-in-btn-true">Log In</RouterLink>
+                        <RouterLink to="/RestaurantLogin" class="is-logged-in-btn-true">Se connecter</RouterLink>
                         <span >
-                            <RouterLink to="/Login" @click="logOut" class="is-logged-in-btn-false">Log Out</RouterLink>
+                            <RouterLink to="/RestaurantLogin" @click="logOut" class="is-logged-in-btn-false">Déconnexion</RouterLink>
                         </span>
                     </div>
                 </li>

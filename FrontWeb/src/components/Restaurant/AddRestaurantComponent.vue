@@ -1,5 +1,5 @@
 <script setup>
-import { useRestaurantStore } from '../store/restaurantStore.js';
+import { useRestaurantStore } from '../../store/restaurantStore.js';
 import { ref } from 'vue';
 
 const restaurantStore = useRestaurantStore();
