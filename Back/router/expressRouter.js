@@ -10,11 +10,17 @@ const delivererController = require("../controller/delivererController");
 const jwt = require("jsonwebtoken");
 
 function protectRoute(role = '') {
+
+	if (role === '') {
+		return sendResponse(res, 401, 'API endpoint does not have the required role specified');
+	}
+
+
 	return function (req, res, next) {
 		try {
 			const token = req.headers.authorization.split(' ')[1];
 
-			if (token) {
+			if (!token) {
 				return sendResponse(res, 401, 'Authorization token is missing');
 			}
 
