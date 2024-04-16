@@ -10,13 +10,12 @@ const delivererController = require("../controller/delivererController");
 const jwt = require("jsonwebtoken");
 
 function protectRoute(role = '') {
-
-	if (role === '') {
-		return sendResponse(res, 401, 'API endpoint does not have the required role specified');
-	}
-
-
 	return function (req, res, next) {
+		if (role === '') {
+			return sendResponse(res, 500, 'API endpoint does not have the required role specified');
+		}
+
+
 		try {
 			const token = req.headers.authorization.split(' ')[1];
 
@@ -37,7 +36,7 @@ function protectRoute(role = '') {
 
 			return next();
 		} catch (error) {
-			sendResponse(res, 500, `${error.message}: Please verify log in status to access this`);
+			sendResponse(res, 401, `${error.message}: Please verify log in status to access this`);
 		}
 	};
 }
